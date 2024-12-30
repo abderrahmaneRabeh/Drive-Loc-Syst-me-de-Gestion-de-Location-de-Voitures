@@ -85,8 +85,8 @@
                                 <div class="fas fa-user"></div>
                             </a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">S'inscrire</a>
-                                <a href="testimonial.html" class="dropdown-item">Se connecter</a>
+                                <a href="./views/Sinscrire.php" class="dropdown-item">S'inscrire</a>
+                                <a href="./views/Se_connecter.php" class="dropdown-item">Se connecter</a>
                             </div>
                         </div>
                     </div>

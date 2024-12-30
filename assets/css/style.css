@@ -91,7 +91,7 @@ h6,
 }
 
 @media (max-width: 991.98px) {
-    .navbar-dark .navbar-nav .nav-link  {
+    .navbar-dark .navbar-nav .nav-link {
         padding: 10px 15px;
     }
 }
@@ -312,4 +312,19 @@ h6,
 .bg-banner {
     background: linear-gradient(rgba(28, 30, 50, .9), rgba(28, 30, 50, .9)), url(../img/bg-banner.jpg);
     background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+    width: 0.4em;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    background: darkblue;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: orange;
+
 }
