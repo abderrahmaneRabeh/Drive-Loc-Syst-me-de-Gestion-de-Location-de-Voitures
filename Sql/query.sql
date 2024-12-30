@@ -28,12 +28,8 @@ CREATE TABLE vehicule (
     prixJournalier DECIMAL(10, 2) NOT NULL,
     disponible BOOLEAN DEFAULT TRUE,
     kilometrage INT NOT NULL,
-    carburant ENUM('Essence', 'Diesel', 'Électrique') NOT NULL,
-    nombrePortes INT NOT NULL,
-    capacite INT NOT NULL,
     transmission ENUM('Manuelle', 'Automatique') NOT NULL,
     couleur VARCHAR(50) NOT NULL,
-    annee YEAR NOT NULL,
     categorie_id INT NOT NULL,
     FOREIGN KEY (categorie_id) REFERENCES categories(id_category)
 );
