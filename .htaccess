@@ -1,0 +1,1 @@
+ErrorDocument 404 http://localhost/Drive_Loc-Gestion_Vehicules/views/404.php
