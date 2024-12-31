@@ -109,25 +109,31 @@
         <a href="../index.php">
             <button class="btn btn-home">Retour à l'accueil</button>
         </a>
+
+        <?php
+        if (isset($_GET['msg'])) {
+            echo "<p class='text-center text-danger'>" . $_GET['msg'] . "</p>";
+        }
+        ?>
         <h1>Inscription</h1>
         <p class="text-center">Vous avez déjà un compte ? <a href="./Se_connecter.php" class="text-link">Connexion</a>
         </p>
-        <form method="post" action="TraiterInscription.php">
+        <form method="post" action="../Controllers/SinscrireController.php">
             <div class="mb-3">
                 <label for="Nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="Nom" name="Nom" required>
+                <input type="text" class="form-control" id="Nom" name="nom" required>
             </div>
             <div class="mb-3">
                 <label for="Email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="Email" name="Email" required>
+                <input type="email" class="form-control" id="Email" name="email" required>
             </div>
             <div class="mb-3">
                 <label for="MotDePasse" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="MotDePasse" name="MotDePasse" required>
+                <input type="password" class="form-control" id="MotDePasse" name="motDePasse" required>
             </div>
             <div class="mb-3">
                 <label for="ConfirmerMotDePasse" class="form-label">Confirmer le mot de passe</label>
-                <input type="password" class="form-control" id="ConfirmerMotDePasse" name="ConfirmerMotDePasse"
+                <input type="password" class="form-control" id="ConfirmerMotDePasse" name="confirmerMotDePasse"
                     required>
             </div>
             <div class="text-center">
