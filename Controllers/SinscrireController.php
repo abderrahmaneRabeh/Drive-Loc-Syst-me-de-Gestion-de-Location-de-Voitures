@@ -1,5 +1,6 @@
 <?php
 require_once '../Models/Sinscrire.php';
+require_once '../Models/user.php';
 
 class SinscrireController extends Sinscrire
 {
@@ -8,12 +9,16 @@ class SinscrireController extends Sinscrire
         $result = $this->Register($nom, $email, $pw, $ConfirmPw);
         if ($result) {
             session_start();
+
+            $user = new User();
+            $utilisateurSelectioner = $user->get_User($email);
+
+            $_SESSION['user'] = $utilisateurSelectioner;
+            $_SESSION['role'] = $utilisateurSelectioner['role_id'];
             header("Location: ../index.php");
-            echo "success register";
             exit;
         } else {
             header("Location: ../index.php");
-            echo "failed register";
             exit;
         }
     }
