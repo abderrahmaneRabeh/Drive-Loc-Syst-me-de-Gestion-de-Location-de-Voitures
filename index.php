@@ -101,7 +101,7 @@ Check_Home_Page();
                                     <a href="./Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">Dashboard</a>
+                                    <a href="#" class="dropdown-item">client Dashboard</a>
                                 </div>
                             </div>
                         <?php elseif (isset($_SESSION['user']) && $_SESSION['role'] == 1): ?>
@@ -113,7 +113,7 @@ Check_Home_Page();
                                     <a href="./Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">Dashboard</a>
+                                    <a href="#" class="dropdown-item">admin Dashboard</a>
                                 </div>
                             </div>
                         <?php else: ?>

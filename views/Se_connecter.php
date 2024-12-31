@@ -118,14 +118,24 @@
         <h1>Connexion</h1>
         <p class="text-center">Vous n'avez pas de compte ? <a href="./Sinscrire.php"
                 class="text-link">Inscrivez-vous</a></p>
-        <form method="post" action="TraiterConnexion.php">
+        <form method="post" action="../Controllers/SeconnecterController.php">
             <div class="mb-3">
                 <label for="Email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="Email" name="Email" required>
+                <input type="email" class="form-control" id="Email" name="email" required>
+                <?php
+                if (isset($_GET['email'])) {
+                    echo "<p class='text-center text-danger'>" . $_GET['email'] . "</p>";
+                }
+                ?>
             </div>
             <div class="mb-3">
                 <label for="MotDePasse" class="form-label">Mot de passe</label>
-                <input type="password" class="form-control" id="MotDePasse" name="MotDePasse" required>
+                <input type="password" class="form-control" id="MotDePasse" name="motDePasse" required>
+                <?php
+                if (isset($_GET['pw'])) {
+                    echo "<p class='text-center text-danger'>" . $_GET['pw'] . "</p>";
+                }
+                ?>
             </div>
             <div class="text-center">
                 <button class="btn btn-primary w-100" type="submit">Se connecter</button>

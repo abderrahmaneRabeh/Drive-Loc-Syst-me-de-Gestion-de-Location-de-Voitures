@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../middleware/Check_user_connexion.php';
 Check_List_Voiture_Page();
 ?>
@@ -105,11 +105,11 @@ Check_List_Voiture_Page();
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mt-5">
-        <h1 class="display-3 text-uppercase text-white mb-3">Car Listing</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">List Voitures</h1>
         <div class="d-inline-flex text-white">
             <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">Car Listing</h6>
+            <h6 class="text-uppercase text-body m-0">List Voitures</h6>
         </div>
     </div>
     <!-- Page Header Start -->
@@ -118,7 +118,7 @@ Check_List_Voiture_Page();
     <!-- Rent A Car Start -->
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
-            <h1 class="display-4 text-uppercase text-center mb-5">Find Your Car</h1>
+            <h1 class="display-4 text-uppercase text-center mb-5">Trouvez votre voiture</h1>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-2">
                     <div class="rent-item mb-4">

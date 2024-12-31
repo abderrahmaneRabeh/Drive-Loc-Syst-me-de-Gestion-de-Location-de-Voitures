@@ -20,10 +20,20 @@ class SeconnecterController extends Seconnecter
             header("Location: ../index.php");
             exit;
         } else {
-            header("Location: ../views/Sinscrire.php?msg=Password Incorrect");
+            header("Location: ../views/Se_connecter.php?pw=Password Incorrect");
             exit;
         }
 
     }
+
+}
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = $_POST['email'];
+    $pw = $_POST['motDePasse'];
+
+    $AuthController = new SeconnecterController();
+    $AuthController->LoginController($email, $pw);
 
 }

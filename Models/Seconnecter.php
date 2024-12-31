@@ -34,7 +34,7 @@ class Seconnecter extends Database
             }
 
         } else {
-            header("Location: ../views/Seconnecter.php?email=Incorrect Email");
+            header("Location: ../views/Se_connecter.php?email=Incorrect Email");
             exit;
         }
     }
