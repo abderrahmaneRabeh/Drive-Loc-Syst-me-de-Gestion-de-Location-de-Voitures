@@ -109,6 +109,12 @@
             <button class="btn btn-home">Retour à l'accueil</button>
         </a>
 
+        <?php
+        if (isset($_GET['msg'])) {
+            echo "<p class='text-center text-danger'>" . $_GET['msg'] . "</p>";
+        }
+        ?>
+
         <h1>Connexion</h1>
         <p class="text-center">Vous n'avez pas de compte ? <a href="./Sinscrire.php"
                 class="text-link">Inscrivez-vous</a></p>

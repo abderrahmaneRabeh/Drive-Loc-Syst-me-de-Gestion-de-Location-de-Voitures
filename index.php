@@ -1,5 +1,8 @@
 <?php
+require_once './middleware/Check_user_connexion.php';
 session_start();
+
+Check_Home_Page();
 
 
 // var_dump($_SESSION);

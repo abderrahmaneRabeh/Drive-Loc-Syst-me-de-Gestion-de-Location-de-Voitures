@@ -1,3 +1,9 @@
+<?php
+
+require_once '../middleware/Check_user_connexion.php';
+Check_List_Voiture_Page();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
