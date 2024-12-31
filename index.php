@@ -4,11 +4,6 @@ session_start();
 
 Check_Home_Page();
 
-
-// var_dump($_SESSION);
-// echo $_SESSION['user']['username'];
-// echo $_SESSION['role'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">

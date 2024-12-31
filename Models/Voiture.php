@@ -4,7 +4,7 @@ require "Database.php";
 
 class Voiture extends Database
 {
-    private $lignes_par_page = 9;
+    private $lignes_par_page = 6;
     private $Conx_DataBase;
 
     public function __construct()

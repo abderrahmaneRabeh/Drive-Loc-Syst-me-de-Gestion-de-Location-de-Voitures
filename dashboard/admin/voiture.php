@@ -1,3 +1,28 @@
+<?php
+session_start();
+require_once '../../middleware/Check_user_connexion.php';
+require_once '../../Models/Voiture.php';
+// require_once '../../Controllers/ListVoitureController.php';
+
+Dashboard_admin_check_roleConnect();
+
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
+$ListVoitureController = new Voiture();
+$listVoiture = $ListVoitureController->getVoitures($page);
+
+$totalLignes = $ListVoitureController->Nbr_Voiture();
+$LigneParPage = $ListVoitureController->getLinesParPage();
+
+$LignesSelectioner = ceil($totalLignes / $LigneParPage);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="dark">
 
@@ -13,6 +38,8 @@
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
     <link rel="icon" href="../../assets/images/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/Reservation.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -90,8 +117,16 @@
                 </li>
             </ul>
             <div class="account-info">
-                <li class="scroll-to-section"><a href="./pages/login.php" id="login">S\'inscrire</a></li>
-                <a href="/db/lougout.php" class="account-info-more lougout-btn">
+                <?php
+                if (isset($_SESSION["user"])) {
+                    echo "<div class=\"account-info-name\">" . $_SESSION["user"]["username"] . "</div>";
+
+                } else {
+                    echo '<li class="scroll-to-section"><a href="./pages/login.php" id="login">S\'inscrire</a></li>';
+                }
+
+                ?>
+                <a href="../../Controllers/Lougout.php" class="account-info-more lougout-btn">
                     <button class="account-info-more"
                         style="display: flex; align-items: center; justify-content: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -128,9 +163,106 @@
                 </div>
             </div>
             <div class="products-area-wrapper tableView">
+                <!-- Add New Voiture Button -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 style="color: white;">Liste des Voitures</h2>
+                    <a href="./add.php" class="btn" style="background-color: #fff; color: #000;">Ajouter une Nouvelle
+                        Voiture</a>
+                </div>
+
+                <!-- Enhanced Table -->
+                <table class="table table-dark table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Modèle</th>
+                            <th>Marque</th>
+                            <th>Prix Journalier</th>
+                            <th>Transmission</th>
+                            <th>Couleur</th>
+                            <th>Kilométrage</th>
+                            <th>Disponible</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listVoiture as $voiture) { ?>
+                            <tr>
+                                <td><?= $voiture['id_vehivule'] ?></td>
+                                <td><?= $voiture['modele']; ?></td>
+                                <td><?= $voiture['marque']; ?></td>
+                                <td>$<?= $voiture['prixJournalier']; ?></td>
+                                <td><?= $voiture['transmission']; ?></td>
+                                <td><?= $voiture['couleur']; ?></td>
+                                <td><?= $voiture['kilometrage']; ?>Km</td>
+                                <td class="text-center">
+                                    <?php if ($voiture['disponible']) { ?>
+                                        <span class="badge badge-success">Oui</span>
+                                    <?php } else { ?>
+                                        <span class="badge badge-danger">Non</span>
+                                    <?php } ?>
+                                </td>
+                                <td class="text-center">
+                                    <a href="./edit.php?id=<?= $voiture['id_vehivule']; ?>"
+                                        class="btn btn-warning btn-sm">Modifier</a>
+                                    <a href="./delete.php?id=<?= $voiture['id_vehivule']; ?>"
+                                        class="btn btn-danger btn-sm">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+
+                <div class="container-fluid pt-4 pb-3">
+                    <div class="d-flex  justify-content-center">
+                        <nav>
+                            <ul class="pagination justify-content-center mb-0">
+                                <li class="page-item">
+                                    <?php
+                                    if ($page > 1) {
+                                        $previous = $page - 1;
+                                        echo "<a class='page-link' href='?page=$previous'><i class='fa fa-angle-double-left'></i></a>";
+                                    } else {
+                                        echo "<a class='page-link' href='?page=1'><i class='fa fa-angle-double-left'></i></a>";
+                                    }
+                                    ?>
+                                </li>
+                                <?php
+
+                                for ($i = 1; $i <= $LignesSelectioner; $i++) {
+                                    if ($page == $i) {
+                                        echo "<li class='page-item active'><a class='page-link' href='#'>$i<span class='sr-only'></span></a></li>";
+                                    } else {
+                                        echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+                                    }
+                                }
+
+                                ?>
 
 
+                                <li class="page-item">
+                                    <?php
+
+                                    if ($page < $LignesSelectioner) {
+                                        $suivant = $page + 1;
+                                        echo "<a class='page-link' href='?page=$suivant'><i class='fa fa-angle-double-right'></i></a>";
+                                    } else {
+                                        echo "<a class='page-link' href='?page=$LignesSelectioner'><i class='fa fa-angle-double-right'></i></a>";
+
+                                    }
+
+                                    ?>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
             </div>
+
+            <!-- Pagination -->
+
+
+
         </div>
     </div>
 
