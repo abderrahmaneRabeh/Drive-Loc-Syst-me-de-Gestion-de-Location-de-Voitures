@@ -249,10 +249,10 @@
     <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
         <div class="row pt-5">
             <div class="col-lg-4 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Get In Touch</h4>
-                <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>123 Street, New York, USA</p>
-                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+012 345 67890</p>
-                <p><i class="fa fa-envelope text-white mr-3"></i>info@example.com</p>
+                <h4 class="text-uppercase text-light mb-4">Contact Nous</h4>
+                <p class="mb-2"><i class="fa fa-map-marker-alt text-white mr-3"></i>Safi, Nouvelle ville</p>
+                <p class="mb-2"><i class="fa fa-phone-alt text-white mr-3"></i>+212 345 67890</p>
+                <p><i class="fa fa-envelope text-white mr-3"></i>rabehlife144@gmail.com</p>
                 <h6 class="text-uppercase text-white py-2">Follow Us</h6>
                 <div class="d-flex justify-content-start">
                     <a class="btn btn-lg btn-dark btn-lg-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
@@ -262,41 +262,37 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Usefull Links</h4>
+                <h4 class="text-uppercase text-light mb-4">Liens vers Autres</h4>
                 <div class="d-flex flex-column justify-content-start">
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Private
-                        Policy</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Term &
-                        Conditions</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>New Member
-                        Registration</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Affiliate
-                        Programme</a>
-                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Return &
-                        Refund</a>
-                    <a class="text-body" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Help & FQAs</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Acceuil</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Liste des
+                        voitures</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Category</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>S'inscrire</a>
+                    <a class="text-body mb-2" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Se connecter</a>
+                    <a class="text-body" href="#"><i class="fa fa-angle-right text-white mr-2"></i>Contact</a>
                 </div>
             </div>
+
             <div class="col-lg-4 col-md-6 mb-5">
-                <h4 class="text-uppercase text-light mb-4">Newsletter</h4>
-                <p class="mb-4">Volup amet magna clita tempor. Tempor sea eos vero ipsum. Lorem lorem sit sed elitr sed
-                    kasd et</p>
+                <h4 class="text-uppercase text-light mb-4">Donner Message</h4>
+                <p class="mb-4">Envoyez-nous un message et nous vous contacterons dans les plus bref delai</p>
                 <div class="w-100 mb-3">
                     <div class="input-group">
                         <input type="text" class="form-control bg-dark border-dark" style="padding: 25px;"
                             placeholder="Your Email">
                         <div class="input-group-append">
-                            <button class="btn btn-primary text-uppercase px-3">Sign Up</button>
+                            <button class="btn btn-primary text-uppercase px-3">S'inscrire</button>
                         </div>
                     </div>
                 </div>
-                <i>Lorem sit sed elitr sed kasd et</i>
+                <i>Restez connecter</i>
             </div>
         </div>
     </div>
     <div class="container-fluid bg-dark py-4 px-sm-3 px-md-5">
-        <p class="mb-2 text-center text-body">&copy; <a href="#">Your Site Name</a>. All Rights Reserved.</p>
-        <p class="m-0 text-center text-body">Designed by <a href="https://htmlcodex.com">HTML Codex</a></p>
+        <p class="mb-2 text-center text-body">&copy; <a href="#">CodeChogun</a>. Tout les droits reserve.</p>
+        <p class="m-0 text-center text-body">Crée par <a href="https://htmlcodex.com">Abderrahmane Rabeh</a></p>
     </div>
     <!-- Footer End -->
 
