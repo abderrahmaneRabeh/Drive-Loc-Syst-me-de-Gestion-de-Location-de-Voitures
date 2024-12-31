@@ -4,9 +4,9 @@ require_once '../Models/Voiture.php';
 class ListVoitureController extends Voiture
 {
 
-    public function List_Voitures()
+    public function List_Voitures($page)
     {
-        return $this->getVoitures();
+        return $this->getVoitures($page);
     }
 
 }

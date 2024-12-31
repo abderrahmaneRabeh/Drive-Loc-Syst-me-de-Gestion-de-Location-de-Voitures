@@ -3,10 +3,22 @@ session_start();
 require_once '../middleware/Check_user_connexion.php';
 require_once '../Controllers/ListVoitureController.php';
 
+if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+} else {
+    $page = 1;
+}
+
 Check_List_Voiture_Page();
 
 $ListVoitureController = new ListVoitureController();
-$listVoiture = $ListVoitureController->List_Voitures();
+$listVoiture = $ListVoitureController->List_Voitures($page);
+
+$totalLignes = $ListVoitureController->Nbr_Voiture();
+$LigneParPage = $ListVoitureController->getLinesParPage();
+
+$LignesSelectioner = ceil($totalLignes / $LigneParPage);
+
 ?>
 
 <!DOCTYPE html>
@@ -160,15 +172,15 @@ $listVoiture = $ListVoitureController->List_Voitures();
                             <div class="d-flex justify-content-center mb-4">
                                 <div class="px-2">
                                     <i class="fa fa-car text-primary mr-1"></i>
-                                    <span>2015</span>
+                                    <span><?= $voiture['couleur'] ?></span>
                                 </div>
                                 <div class="px-2 border-left border-right">
                                     <i class="fa fa-cogs text-primary mr-1"></i>
-                                    <span>AUTO</span>
+                                    <span><?= $voiture['transmission'] ?></span>
                                 </div>
                                 <div class="px-2">
                                     <i class="fa fa-road text-primary mr-1"></i>
-                                    <span><?= $voiture['kilometrage'] ?></span>
+                                    <span><?= $voiture['kilometrage'] ?>Km</span>
                                 </div>
                             </div>
                             <a class="btn btn-primary px-3" href="">$<?= $voiture['prixJournalier'] ?>/jour</a>
@@ -178,6 +190,54 @@ $listVoiture = $ListVoitureController->List_Voitures();
             </div>
         </div>
     </div>
+
+    <!-- Pagination Start -->
+    <div class="container-fluid pt-4 pb-3">
+        <div class="d-flex  justify-content-center">
+            <nav>
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item">
+                        <?php
+                        if ($page > 1) {
+                            $previous = $page - 1;
+                            echo "<a class='page-link' href='?page=$previous'><i class='fa fa-angle-double-left'></i></a>";
+                        } else {
+                            echo "<a class='page-link' href='?page=1'><i class='fa fa-angle-double-left'></i></a>";
+                        }
+                        ?>
+                    </li>
+                    <?php
+
+                    for ($i = 1; $i <= $LignesSelectioner; $i++) {
+                        if ($page == $i) {
+                            echo "<li class='page-item active'><a class='page-link' href='#'>$i<span class='sr-only'></span></a></li>";
+                        } else {
+                            echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+                        }
+                    }
+
+                    ?>
+
+
+                    <li class="page-item">
+                        <?php
+
+                        if ($page < $LignesSelectioner) {
+                            $suivant = $page + 1;
+                            echo "<a class='page-link' href='?page=$suivant'><i class='fa fa-angle-double-right'></i></a>";
+                        } else {
+                            echo "<a class='page-link' href='?page=$LignesSelectioner'><i class='fa fa-angle-double-right'></i></a>";
+
+                        }
+
+                        ?>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <!-- Pagination End -->
+
     <!-- Rent A Car End -->
 
     <!-- Footer Start -->
