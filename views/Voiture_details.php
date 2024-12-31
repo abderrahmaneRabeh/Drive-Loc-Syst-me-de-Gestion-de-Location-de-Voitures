@@ -160,7 +160,10 @@ if (isset($_GET['id'])) {
                         <img class="card-img-top" src="<?php echo $voiture['image_url']; ?>"
                             alt="<?php echo $voiture['modele']; ?>">
                         <div class="card-body">
-                            <h2 class="text-uppercase text-primary mb-3"><?php echo $voiture['modele']; ?></h2>
+                            <h2 class="text-uppercase text-primary mb-3">
+                                <?php echo $voiture['marque']; ?>
+                                <?php echo $voiture['modele']; ?>
+                            </h2>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">
                                     <strong>Disponible:</strong>
@@ -198,49 +201,53 @@ if (isset($_GET['id'])) {
                 <!-- Reservation Form -->
                 <div class="col-lg-4">
                     <div class="bg-white shadow p-4 rounded">
-                        <h3 class="text-primary text-center mb-4">Réserver ce véhicule</h3>
-                        <form action="reserve_vehicle.php" method="POST">
-                            <!-- Date début -->
-                            <div class="form-group">
-                                <label for="dateDebut">Date de début</label>
-                                <input type="date" name="dateDebut" id="dateDebut" class="form-control" required>
-                            </div>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
+                            <h3 class="text-primary text-center mb-4">Réserver ce véhicule</h3>
+                            <form action="reserve_vehicle.php" method="POST">
+                                <!-- Date début -->
+                                <div class="form-group">
+                                    <label for="dateDebut">Date de début</label>
+                                    <input type="date" name="dateDebut" id="dateDebut" class="form-control" required>
+                                </div>
 
-                            <!-- Date fin -->
-                            <div class="form-group">
-                                <label for="dateFin">Date de fin</label>
-                                <input type="date" name="dateFin" id="dateFin" class="form-control" required>
-                            </div>
+                                <!-- Date fin -->
+                                <div class="form-group">
+                                    <label for="dateFin">Date de fin</label>
+                                    <input type="date" name="dateFin" id="dateFin" class="form-control" required>
+                                </div>
 
-                            <!-- Lieu prise en charge -->
-                            <div class="form-group">
-                                <label for="lieuPriseCharge">Lieu de prise en charge</label>
-                                <select name="lieuPriseCharge" id="lieuPriseCharge" class="form-control" required>
-                                    <option value="" selected disabled>Choisissez un lieu</option>
-                                    <option value="Casablanca">Casablanca</option>
-                                    <option value="Rabat">Rabat</option>
-                                    <option value="Marrakech">Marrakech</option>
-                                    <option value="Fès">Fès</option>
-                                </select>
-                            </div>
+                                <!-- Lieu prise en charge -->
+                                <div class="form-group">
+                                    <label for="lieuPriseCharge">Lieu de prise en charge</label>
+                                    <select name="lieuPriseCharge" id="lieuPriseCharge" class="form-control" required>
+                                        <option value="" selected disabled>Choisissez un lieu</option>
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Fès">Fès</option>
+                                    </select>
+                                </div>
 
-                            <!-- Lieu retour -->
-                            <div class="form-group">
-                                <label for="lieuRetour">Lieu de retour</label>
-                                <select name="lieuRetour" id="lieuRetour" class="form-control" required>
-                                    <option value="" selected disabled>Choisissez un lieu</option>
-                                    <option value="Casablanca">Casablanca</option>
-                                    <option value="Rabat">Rabat</option>
-                                    <option value="Marrakech">Marrakech</option>
-                                    <option value="Fès">Fès</option>
-                                </select>
-                            </div>
+                                <!-- Lieu retour -->
+                                <div class="form-group">
+                                    <label for="lieuRetour">Lieu de retour</label>
+                                    <select name="lieuRetour" id="lieuRetour" class="form-control" required>
+                                        <option value="" selected disabled>Choisissez un lieu</option>
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Fès">Fès</option>
+                                    </select>
+                                </div>
 
-                            <!-- Submit Button -->
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block">Réserver Maintenant</button>
-                            </div>
-                        </form>
+                                <!-- Submit Button -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Réserver Maintenant</button>
+                                </div>
+                            </form>
+                        <?php else: ?>
+                            <h4 class="text-primary text-center mb-4">Just Les Utilisateurs <br>peuvent Reserver</h4>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
