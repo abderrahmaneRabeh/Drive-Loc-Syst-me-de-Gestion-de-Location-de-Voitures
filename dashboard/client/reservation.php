@@ -73,7 +73,7 @@ Dashboard_client_check_roleConnect();
                 }
 
                 ?>
-                <a href="/db/lougout.php" class="account-info-more lougout-btn">
+                <a href="../../Controllers/Lougout.php" class="account-info-more lougout-btn">
                     <button class="account-info-more"
                         style="display: flex; align-items: center; justify-content: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"

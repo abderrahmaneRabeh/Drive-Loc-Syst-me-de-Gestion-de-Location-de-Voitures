@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
-require_once '../../Controllers/ListVoitureController.php';
 Dashboard_admin_check_roleConnect();
 
 
@@ -98,8 +97,16 @@ Dashboard_admin_check_roleConnect();
                 </li>
             </ul>
             <div class="account-info">
-                <li class="scroll-to-section"><a href="./pages/login.php" id="login">S\'inscrire</a></li>
-                <a href="/db/lougout.php" class="account-info-more lougout-btn">
+                <?php
+                if (isset($_SESSION["user"])) {
+                    echo "<div class=\"account-info-name\">" . $_SESSION["user"]["username"] . "</div>";
+
+                } else {
+                    echo '<li class="scroll-to-section"><a href="./pages/login.php" id="login">S\'inscrire</a></li>';
+                }
+
+                ?>
+                <a href="../../controllers/lougout.php" class="account-info-more lougout-btn">
                     <button class="account-info-more"
                         style="display: flex; align-items: center; justify-content: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
