@@ -104,7 +104,7 @@ if (isset($_GET['id'])) {
                                     <a href="../Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">client Dashboard</a>
+                                    <a href="../dashboard/client/reservation.php" class="dropdown-item">client Dashboard</a>
                                 </div>
                             </div>
                         <?php elseif (isset($_SESSION['user']) && $_SESSION['role'] == 1): ?>
@@ -116,7 +116,7 @@ if (isset($_GET['id'])) {
                                     <a href="../Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">admin Dashboard</a>
+                                    <a href="../dashboard/admin/voiture.php" class="dropdown-item">admin Dashboard</a>
                                 </div>
                             </div>
                         <?php else: ?>

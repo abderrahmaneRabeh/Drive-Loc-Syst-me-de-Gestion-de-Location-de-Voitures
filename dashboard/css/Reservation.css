@@ -82,3 +82,26 @@
 .btn:hover {
     opacity: 0.9;
 }
+
+.pagination .page-link {
+    border-radius: 50%;
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination .page-link:hover {
+    background-color: #ffc107;
+    color: #000;
+}
+
+.pagination .page-item.active .page-link {
+    color: #fff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.pagination .page-item.disabled .page-link {
+    cursor: not-allowed;
+    background-color: #6c757d;
+    color: #fff;
+}

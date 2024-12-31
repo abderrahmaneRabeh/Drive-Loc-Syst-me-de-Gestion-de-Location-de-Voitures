@@ -166,7 +166,8 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                 <!-- Add New Voiture Button -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 style="color: white;">Liste des Voitures</h2>
-                    <a href="./add.php" class="btn" style="background-color: #fff; color: #000;">Ajouter une Nouvelle
+                    <a href="/views/Ajouter_ville__form.php" class="btn"
+                        style="background-color: #fff; color: #000;">Ajouter une Nouvelle
                         Voiture</a>
                 </div>
 
@@ -214,49 +215,43 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                 </table>
 
                 <div class="container-fluid pt-4 pb-3">
-                    <div class="d-flex  justify-content-center">
+                    <div class="d-flex justify-content-center">
                         <nav>
                             <ul class="pagination justify-content-center mb-0">
                                 <li class="page-item">
                                     <?php
                                     if ($page > 1) {
                                         $previous = $page - 1;
-                                        echo "<a class='page-link' href='?page=$previous'><i class='fa fa-angle-double-left'></i></a>";
+                                        echo "<a class='page-link' href='?page=$previous' style='background-color: #ffc107; color: #000;'><i class='fa fa-angle-double-left'></i></a>";
                                     } else {
-                                        echo "<a class='page-link' href='?page=1'><i class='fa fa-angle-double-left'></i></a>";
+                                        echo "<a class='page-link' href='?page=1' style='background-color: #6c757d; color: #fff; cursor: not-allowed;'><i class='fa fa-angle-double-left'></i></a>";
                                     }
                                     ?>
                                 </li>
                                 <?php
-
                                 for ($i = 1; $i <= $LignesSelectioner; $i++) {
                                     if ($page == $i) {
-                                        echo "<li class='page-item active'><a class='page-link' href='#'>$i<span class='sr-only'></span></a></li>";
+                                        echo "<li class='page-item active'><a class='page-link' href='#' style='background-color: #28a745; border-color: #28a745;'>$i<span class='sr-only'></span></a></li>";
                                     } else {
-                                        echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+                                        echo "<li class='page-item'><a class='page-link' href='?page=$i' style='background-color: #1a1a2e; color: #fff; border-color: #444;'>$i</a></li>";
                                     }
                                 }
-
                                 ?>
-
-
                                 <li class="page-item">
                                     <?php
-
                                     if ($page < $LignesSelectioner) {
                                         $suivant = $page + 1;
-                                        echo "<a class='page-link' href='?page=$suivant'><i class='fa fa-angle-double-right'></i></a>";
+                                        echo "<a class='page-link' href='?page=$suivant' style='background-color: #ffc107; color: #000;'><i class='fa fa-angle-double-right'></i></a>";
                                     } else {
-                                        echo "<a class='page-link' href='?page=$LignesSelectioner'><i class='fa fa-angle-double-right'></i></a>";
-
+                                        echo "<a class='page-link' href='?page=$LignesSelectioner' style='background-color: #6c757d; color: #fff; cursor: not-allowed;'><i class='fa fa-angle-double-right'></i></a>";
                                     }
-
                                     ?>
                                 </li>
                             </ul>
                         </nav>
                     </div>
                 </div>
+
             </div>
 
             <!-- Pagination -->
