@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once '../middleware/Check_user_connexion.php';
+Check_auth_User();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 

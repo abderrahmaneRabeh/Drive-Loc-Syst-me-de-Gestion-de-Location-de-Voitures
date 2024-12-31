@@ -86,15 +86,41 @@ Check_List_Voiture_Page();
                         <a href="../index.php" class="nav-item nav-link">Accueil</a>
                         <a href="./List_Voitures.php" class="nav-item active nav-link">List Voitures</a>
                         <a href="service.html" class="nav-item nav-link">Categories</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                                <div class="fas fa-user"></div>
-                            </a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="team.html" class="dropdown-item">S'inscrire</a>
-                                <a href="testimonial.html" class="dropdown-item">Se connecter</a>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    <?= $_SESSION['user']['username']; ?>
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="../Controllers/Lougout.php" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </a>
+                                    <a href="#" class="dropdown-item">client Dashboard</a>
+                                </div>
                             </div>
-                        </div>
+                        <?php elseif (isset($_SESSION['user']) && $_SESSION['role'] == 1): ?>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    <?= $_SESSION['user']['username']; ?>
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="../Controllers/Lougout.php" class="dropdown-item">
+                                        <i class="fas fa-sign-out-alt"></i>
+                                    </a>
+                                    <a href="#" class="dropdown-item">admin Dashboard</a>
+                                </div>
+                            </div>
+                        <?php else: ?>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                                    <div class="fas fa-user"></div>
+                                </a>
+                                <div class="dropdown-menu rounded-0 m-0">
+                                    <a href="./views/Sinscrire.php" class="dropdown-item">S'inscrire</a>
+                                    <a href="./views/Se_connecter.php" class="dropdown-item">Se connecter</a>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </nav>

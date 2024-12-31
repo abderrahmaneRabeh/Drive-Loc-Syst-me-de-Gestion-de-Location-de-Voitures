@@ -14,3 +14,11 @@ function Check_List_Voiture_Page()
         exit;
     }
 }
+
+function Check_auth_User()
+{
+    if (isset($_SESSION['user'])) {
+        header("Location: ../index.php");
+        exit;
+    }
+}
