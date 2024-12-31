@@ -18,7 +18,7 @@ class SinscrireController extends Sinscrire
             header("Location: ../index.php");
             exit;
         } else {
-            header("Location: ../index.php");
+            header("Location: ../views/Sinscrire.php?msg=Un error dans la partie de s'siscrire");
             exit;
         }
     }
