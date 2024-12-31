@@ -9,4 +9,9 @@ class ListVoitureController extends Voiture
         return $this->getVoitures($page);
     }
 
+    public function Get_One_Voiture($id)
+    {
+        return $this->getOneVoiture($id);
+    }
+
 }

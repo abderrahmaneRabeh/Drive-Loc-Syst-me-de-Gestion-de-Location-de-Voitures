@@ -101,7 +101,7 @@ Check_Home_Page();
                                     <a href="./Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">client Dashboard</a>
+                                    <a href="./dashboard/client/reservation.php" class="dropdown-item">client Dashboard</a>
                                 </div>
                             </div>
                         <?php elseif (isset($_SESSION['user']) && $_SESSION['role'] == 1): ?>
@@ -113,7 +113,7 @@ Check_Home_Page();
                                     <a href="./Controllers/Lougout.php" class="dropdown-item">
                                         <i class="fas fa-sign-out-alt"></i>
                                     </a>
-                                    <a href="#" class="dropdown-item">admin Dashboard</a>
+                                    <a href="./dashboard/admin/voiture.php" class="dropdown-item">admin Dashboard</a>
                                 </div>
                             </div>
                         <?php else: ?>
@@ -235,144 +235,6 @@ Check_Home_Page();
     </div>
     <!-- Services End -->
 
-
-    <!-- Rent A Car Start -->
-    <div class="container-fluid py-5">
-        <div class="container pt-5 pb-3">
-            <h1 class="display-4 text-uppercase text-center mb-5">Trouvez votre voiture</h1>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-1.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item active mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-2.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-3.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-4.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-5.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-2">
-                    <div class="rent-item mb-4">
-                        <img class="img-fluid mb-4" src="./assets/img/car-rent-6.png" alt="">
-                        <h4 class="text-uppercase mb-4">Mercedes Benz R3</h4>
-                        <div class="d-flex justify-content-center mb-4">
-                            <div class="px-2">
-                                <i class="fa fa-car text-primary mr-1"></i>
-                                <span>2015</span>
-                            </div>
-                            <div class="px-2 border-left border-right">
-                                <i class="fa fa-cogs text-primary mr-1"></i>
-                                <span>AUTO</span>
-                            </div>
-                            <div class="px-2">
-                                <i class="fa fa-road text-primary mr-1"></i>
-                                <span>25K</span>
-                            </div>
-                        </div>
-                        <a class="btn btn-primary px-3" href="">$99.00/Jour</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Rent A Car End -->
-
-
     <!-- Banner Start -->
     <div class="container-fluid pb-5">
         <div class="container py-5">
@@ -385,7 +247,8 @@ Check_Home_Page();
                             <h3 class="text-uppercase text-light mb-3">Voulez-vous être chauffeur ?</h3>
                             <p class="mb-4">Nous vous offrons des opportunités de carri res comme chauffeur de voitures
                                 de luxe.</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Commencer maintenant</a>
+                            <a class="btn btn-primary py-2 px-4" href="./views/List_Voitures.php">Commencer
+                                maintenant</a>
                         </div>
                     </div>
                 </div>
@@ -395,7 +258,8 @@ Check_Home_Page();
                             <h3 class="text-uppercase text-light mb-3">Vous cherchez une voiture ?</h3>
                             <p class="mb-4">Besoin d'une voiture pour votre prochain d placement ? Nous sommes l pour
                                 vous aider !</p>
-                            <a class="btn btn-primary py-2 px-4" href="">Commencer maintenant</a>
+                            <a class="btn btn-primary py-2 px-4" href="./views/List_Voitures.php">Commencer
+                                maintenant</a>
                         </div>
                         <img class="img-fluid flex-shrink-0 mr-n5 w-50 ml-4" src="./assets/img/banner-right.png" alt="">
                     </div>

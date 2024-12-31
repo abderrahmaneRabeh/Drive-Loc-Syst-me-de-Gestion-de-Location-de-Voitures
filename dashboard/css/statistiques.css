@@ -1,0 +1,103 @@
+.users-table-container {
+    margin: 20px;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff7f50;
+    margin-bottom: 5px;
+}
+
+.user-count {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.users-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+.users-table th,
+.users-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+}
+
+.users-table th {
+    background: #ff7f50;
+    color: #fff;
+    font-weight: bold;
+}
+
+.users-table tbody tr:hover {
+    background: #fce4d6;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 20px;
+}
+
+.status-badge.active {
+    background: #ffb74d;
+    color: #fff;
+}
+
+.btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: #ff7043;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #ff5722;
+}
+
+.btn-danger {
+    background: #e53935;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background: #d32f2f;
+}
+
+.no-data {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+::-webkit-scrollbar {
+    width: 0.4em;
+
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    background: rgb(255, 89, 0);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(165, 78, 78);
+
+}

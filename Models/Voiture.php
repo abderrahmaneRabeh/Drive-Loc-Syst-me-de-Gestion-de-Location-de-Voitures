@@ -34,4 +34,13 @@ class Voiture extends Database
         $listVoiture = $query->fetchAll();
         return $listVoiture;
     }
+
+    public function getOneVoiture($id)
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule, categories WHERE id_vehivule = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        $voiture = $query->fetch();
+        return $voiture;
+    }
 }

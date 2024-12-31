@@ -51,6 +51,19 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
 
     <!-- Template Stylesheet -->
     <link href="../assets/css/style.css" rel="stylesheet">
+
+    <style>
+        .list_voiture {
+            & img {
+                width: 100%;
+                height: 200px;
+            }
+
+            & .list_link {
+                text-decoration: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -165,10 +178,13 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
             <div class="row">
                 <?php foreach ($listVoiture as $voiture): ?>
                     <div class="col-lg-4 col-md-6 mb-2" id="<?= $voiture['id_vehivule'] ?>">
-                        <div class="rent-item mb-4">
-                            <img style="width: 100%; height: 200px;" class="img-fluid mb-4"
-                                src="<?= $voiture['image_url'] ?>" alt="">
-                            <h4 class="text-uppercase mb-4"><?= $voiture['marque'] ?>     <?= $voiture['modele'] ?></h4>
+                        <div class="rent-item mb-4 list_voiture">
+                            <img class="img-fluid mb-4" src="<?= $voiture['image_url'] ?>" alt="">
+                            <a href="./Voiture_details.php?id=<?= $voiture['id_vehivule'] ?>" class="list_link">
+                                <h4 class="text-uppercase mb-4" style="cursor: pointer;"><?= $voiture['marque'] ?>
+                                    <?= $voiture['modele'] ?>
+                                </h4>
+                            </a>
                             <div class="d-flex justify-content-center mb-4">
                                 <div class="px-2">
                                     <i class="fa fa-car text-primary mr-1"></i>
@@ -183,7 +199,8 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                                     <span><?= $voiture['kilometrage'] ?>Km</span>
                                 </div>
                             </div>
-                            <a class="btn btn-primary px-3" href="">$<?= $voiture['prixJournalier'] ?>/jour</a>
+                            <a class="btn btn-primary px-3"
+                                href="./Voiture_details.php?id=<?= $voiture['id_vehivule'] ?>">$<?= $voiture['prixJournalier'] ?>/jour</a>
                         </div>
                     </div>
                 <?php endforeach; ?>
