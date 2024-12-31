@@ -110,7 +110,7 @@
         </a>
 
         <h1>Connexion</h1>
-        <p class="text-center">Vous n'avez pas de compte ? <a href="Inscription.php"
+        <p class="text-center">Vous n'avez pas de compte ? <a href="./Sinscrire.php"
                 class="text-link">Inscrivez-vous</a></p>
         <form method="post" action="TraiterConnexion.php">
             <div class="mb-3">

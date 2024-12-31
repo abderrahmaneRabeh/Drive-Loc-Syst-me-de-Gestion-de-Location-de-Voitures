@@ -110,15 +110,12 @@
             <button class="btn btn-home">Retour à l'accueil</button>
         </a>
         <h1>Inscription</h1>
-        <p class="text-center">Vous avez déjà un compte ? <a href="Connexion.php" class="text-link">Connexion</a></p>
+        <p class="text-center">Vous avez déjà un compte ? <a href="./Se_connecter.php" class="text-link">Connexion</a>
+        </p>
         <form method="post" action="TraiterInscription.php">
             <div class="mb-3">
                 <label for="Nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="Nom" name="Nom" required>
-            </div>
-            <div class="mb-3">
-                <label for="Prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="Prenom" name="Prenom" required>
             </div>
             <div class="mb-3">
                 <label for="Email" class="form-label">Email</label>
