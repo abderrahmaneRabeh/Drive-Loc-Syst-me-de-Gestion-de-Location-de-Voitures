@@ -121,7 +121,7 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                     <div class="navbar-nav ml-auto py-0">
                         <a href="../index.php" class="nav-item nav-link">Accueil</a>
                         <a href="./List_Voitures.php" class="nav-item active nav-link">List Voitures</a>
-                        <a href="service.html" class="nav-item nav-link">Categories</a>
+                        <a href="./List_VoituresCategory.php" class="nav-item nav-link">Categories</a>
                         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">

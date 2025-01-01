@@ -2,15 +2,12 @@
 session_start();
 require_once '../middleware/Check_user_connexion.php';
 require_once '../Controllers/ListVoitureController.php';
+require_once '../Controllers/ListCategories.php';
 Check_List_Voiture_Page();
 
+$categoriesController = new ListCategoriesController();
+$categories = $categoriesController->getCategories();
 
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
-
-    $ListVoitureController = new ListVoitureController();
-    $voiture = $ListVoitureController->Get_One_Voiture($id);
-}
 ?>
 
 <!DOCTYPE html>
@@ -18,13 +15,13 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <title>DRIVE-LOC -- List Voitures Page</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
-    <link href="../assets/img/favicon.ico" rel="icon">
+    <link href="../assets/img/vendor-7.png" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -43,6 +40,7 @@ if (isset($_GET['id'])) {
 
     <!-- Template Stylesheet -->
     <link href="../assets/css/style.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -94,7 +92,7 @@ if (isset($_GET['id'])) {
                     <div class="navbar-nav ml-auto py-0">
                         <a href="../index.php" class="nav-item nav-link">Accueil</a>
                         <a href="./List_Voitures.php" class="nav-item nav-link">List Voitures</a>
-                        <a href="./List_VoituresCategory.php" class="nav-item nav-link">Categories</a>
+                        <a href="./List_VoituresCategory.php" class="nav-item nav-link active">Categories</a>
                         <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -140,123 +138,109 @@ if (isset($_GET['id'])) {
 
     <!-- Page Header Start -->
     <div class="container-fluid page-header mt-5">
-        <h1 class="display-3 text-uppercase text-white mb-3">Voiture Details</h1>
+        <h1 class="display-3 text-uppercase text-white mb-3">Explorez notre catalogue</h1>
         <div class="d-inline-flex text-white">
-            <h6 class="text-uppercase m-0"><a class="text-white" href="">Page Voiture</a></h6>
+            <h6 class="text-uppercase m-0"><a class="text-white" href="">Home</a></h6>
             <h6 class="text-body m-0 px-3">/</h6>
-            <h6 class="text-uppercase text-body m-0">Details</h6>
+            <h6 class="text-uppercase text-body m-0">List Voitures</h6>
         </div>
     </div>
     <!-- Page Header Start -->
 
 
-    <!-- Detail Start -->
-    <div class="container-fluid py-5 bg-light">
-        <div class="container py-5">
-            <div class="row">
-                <!-- Vehicle Details -->
-                <div class="col-lg-8 mb-5">
-                    <div class="card shadow-sm">
-                        <img class="card-img-top" src="<?php echo $voiture['image_url']; ?>"
-                            alt="<?php echo $voiture['modele']; ?>">
-                        <div class="card-body">
-                            <h2 class="text-uppercase text-primary mb-3">
-                                <?php echo $voiture['marque']; ?>
-                                <?php echo $voiture['modele']; ?>
-                            </h2>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <strong>Disponible:</strong>
-                                    <?php
-                                    if ($voiture['disponible']) {
-                                        echo "Oui";
-                                    } else {
-                                        echo "Non";
-                                    }
-                                    ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Marque:</strong> <?php echo $voiture['marque']; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Prix Journalier:</strong> $<?php echo $voiture['prixJournalier']; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Kilométrage:</strong> <?php echo $voiture['kilometrage']; ?> km
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Transmission:</strong> <?php echo $voiture['transmission']; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Couleur:</strong> <?php echo $voiture['couleur']; ?>
-                                </li>
-                                <li class="list-group-item">
-                                    <strong>Catégorie:</strong> <?php echo $voiture['category_name']; ?>
-                                </li>
-                            </ul>
-                        </div>
+    <!-- Rent A Car Start -->
+
+
+    <div class="container-fluid py-5">
+        <div class="container pt-5 pb-3">
+            <h1 class="display-4 text-uppercase text-center mb-5">Trouvez votre voiture</h1>
+            <!-- Conteneur déroulable horizontalement -->
+            <div class="horizontal-scroll">
+                <?php foreach ($categories as $category): ?>
+                    <div class="category-box">
+                        <a href="#" class="category-link"><?= $category['category_name']; ?></a>
                     </div>
-                </div>
-
-                <!-- Reservation Form -->
-                <div class="col-lg-4">
-                    <div class="bg-white shadow p-4 rounded">
-                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
-                            <h3 class="text-primary text-center mb-4">Réserver ce véhicule</h3>
-                            <form action="reserve_vehicle.php" method="POST">
-                                <!-- Date début -->
-                                <div class="form-group">
-                                    <label for="dateDebut">Date de début</label>
-                                    <input type="date" name="dateDebut" id="dateDebut" class="form-control" required>
-                                </div>
-
-                                <!-- Date fin -->
-                                <div class="form-group">
-                                    <label for="dateFin">Date de fin</label>
-                                    <input type="date" name="dateFin" id="dateFin" class="form-control" required>
-                                </div>
-
-                                <!-- Lieu prise en charge -->
-                                <div class="form-group">
-                                    <label for="lieuPriseCharge">Lieu de prise en charge</label>
-                                    <select name="lieuPriseCharge" id="lieuPriseCharge" class="form-control" required>
-                                        <option value="" selected disabled>Choisissez un lieu</option>
-                                        <option value="Casablanca">Casablanca</option>
-                                        <option value="Rabat">Rabat</option>
-                                        <option value="Marrakech">Marrakech</option>
-                                        <option value="Fès">Fès</option>
-                                    </select>
-                                </div>
-
-                                <!-- Lieu retour -->
-                                <div class="form-group">
-                                    <label for="lieuRetour">Lieu de retour</label>
-                                    <select name="lieuRetour" id="lieuRetour" class="form-control" required>
-                                        <option value="" selected disabled>Choisissez un lieu</option>
-                                        <option value="Casablanca">Casablanca</option>
-                                        <option value="Rabat">Rabat</option>
-                                        <option value="Marrakech">Marrakech</option>
-                                        <option value="Fès">Fès</option>
-                                    </select>
-                                </div>
-
-                                <!-- Submit Button -->
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Réserver Maintenant</button>
-                                </div>
-                            </form>
-                        <?php else: ?>
-                            <h4 class="text-primary text-center mb-4">Just Les Utilisateurs <br>peuvent Reserver</h4>
-                        <?php endif; ?>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
-    <!-- Detail End -->
 
 
 
+
+
+
+    <style>
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            /* Active le défilement horizontal */
+            gap: 15px;
+            /* Espacement entre les éléments */
+            padding: 10px;
+            scrollbar-width: thin;
+            /* Réduit la largeur de la scrollbar pour Firefox */
+            scrollbar-color: darkblue #f1f1f1;
+            /* Couleur de la barre de défilement */
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px;
+            /* Hauteur de la scrollbar */
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background-color: #00bcd4;
+            /* Couleur de la barre de défilement */
+            border-radius: 10px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+            /* Couleur de l'arrière-plan de la barre */
+        }
+
+        .category-box {
+            flex: 0 0 auto;
+            /* Assure que chaque catégorie conserve ses dimensions */
+            width: 10rem;
+            height: 5rem;
+            /* Hauteur réduite à 5rem */
+            background: linear-gradient(145deg, #ffffff, #e6e6e6);
+            /* Dégradé moderne */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-box:hover {
+            transform: translateY(-5px);
+            /* Légère élévation au survol */
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 1rem;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .category-link:hover {
+            color: #00bcd4;
+            /* Couleur d'accent au survol */
+        }
+    </style>
+
+
+
+    <!-- Rent A Car End -->
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary py-5 px-sm-3 px-md-5" style="margin-top: 90px;">
@@ -317,12 +301,12 @@ if (isset($_GET['id'])) {
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/easing/easing.min.js"></script>
-    <script src="lib/waypoints/waypoints.min.js"></script>
-    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
-    <script src="lib/tempusdominus/js/moment.min.js"></script>
-    <script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
-    <script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script src="../assets/lib/easing/easing.min.js"></script>
+    <script src="../assets/lib/waypoints/waypoints.min.js"></script>
+    <script src="../assets/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="../assets/lib/tempusdominus/js/moment.min.js"></script>
+    <script src="../assets/lib/tempusdominus/js/moment-timezone.min.js"></script>
+    <script src="../assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
