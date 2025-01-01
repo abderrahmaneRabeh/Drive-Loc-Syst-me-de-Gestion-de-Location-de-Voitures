@@ -71,4 +71,24 @@ class Voiture extends Database
         $query->execute();
         return $query->rowCount();
     }
+
+    public function Modifier_Voiture($id, $modele, $marque, $prixJournalier, $transmission, $couleur, $kilometrage, $voiture_img, $disponible, $category)
+    {
+        $query = $this->Conx_DataBase->prepare("UPDATE vehicule SET 
+        modele = :modele,marque = :marque, prixJournalier = :prixJournalier, disponible = :disponible, kilometrage = :kilometrage, transmission = :transmission, couleur = :couleur, categorie_id = :categorie_id, image_url = :image_url 
+        WHERE id_vehivule = :id_vehivule");
+
+        $query->bindParam(':modele', $modele);
+        $query->bindParam(':marque', $marque);
+        $query->bindParam(':prixJournalier', $prixJournalier);
+        $query->bindParam(':disponible', $disponible);
+        $query->bindParam(':kilometrage', $kilometrage);
+        $query->bindParam(':transmission', $transmission);
+        $query->bindParam(':couleur', $couleur);
+        $query->bindParam(':categorie_id', $category);
+        $query->bindParam(':image_url', $voiture_img);
+        $query->bindParam(':id_vehivule', $id);
+        $query->execute();
+        return $query->rowCount();
+    }
 }

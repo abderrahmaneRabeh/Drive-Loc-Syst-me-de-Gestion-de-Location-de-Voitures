@@ -44,6 +44,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     }
+} else {
+    $tout_est_effectuer = false;
 }
 
 if ($tout_est_effectuer) {

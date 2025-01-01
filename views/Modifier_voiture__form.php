@@ -49,10 +49,11 @@ if (isset($_GET['id'])) {
         </div>
         <h2>Modifier Voiture</h2>
 
-        <form action="/Controllers/Ajouter_Voiture.php" method="POST" id="carForm">
+        <form action="/Controllers/Modifier_Voiture.php" method="POST" id="carForm">
             <div id="carGroupContainer">
                 <div class="car-card">
                     <div class="form-group-row">
+                        <input type="text" name="id" value="<?= $Voiture['id_vehivule'] ?>" hidden>
                         <div class="form-group">
                             <label for="modele">Modele</label>
                             <input type="text" name="modele" value="<?= $Voiture['modele'] ?>"
