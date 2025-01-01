@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../Models/Voiture.php';
 
 class Ajouter_Voiture_Controller extends Voiture
@@ -48,9 +49,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if ($tout_est_effectuer) {
-    header("Location: /dashboard/admin/voiture.php?MsgAjout=L'ajout a fonctionner Succes");
+    $_SESSION["success"] = "Voitures ajouter avec success";
+    header("Location: /dashboard/admin/voiture.php");
     exit;
 } else {
-    header("Location: /dashboard/admin/voiture.php?MsgAjout=L'ajout a echouer");
+    $_SESSION["error"] = "Voitures non ajouter";
+    header("Location: /dashboard/admin/voiture.php");
     exit;
 }

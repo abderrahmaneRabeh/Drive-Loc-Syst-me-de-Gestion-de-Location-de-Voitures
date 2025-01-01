@@ -42,4 +42,12 @@ class Category extends Database
         return $query->rowCount();
     }
 
+    public function Modifier_Category($id, $category_name)
+    {
+        $query = $this->Conx_DataBase->prepare("UPDATE categories SET category_name = :category_name WHERE id_category = :id");
+        $query->bindParam(':category_name', $category_name);
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->rowCount();
+    }
 }

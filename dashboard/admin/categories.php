@@ -147,6 +147,18 @@ $categories = $GategoryController->getCategories();
                     </button>
                 </div>
             </div>
+            <div class="alert-wrapper">
+                <?php
+                if (isset($_SESSION["success"])) {
+                    echo "<div class=\"alert alert-success\">" . $_SESSION["success"] . "</div>";
+                    unset($_SESSION["success"]);
+                }
+                if (isset($_SESSION["error"])) {
+                    echo "<div class=\"alert alert-danger\">" . $_SESSION["error"] . "</div>";
+                    unset($_SESSION["error"]);
+                }
+                ?>
+            </div>
             <div class="products-area-wrapper tableView">
                 <!-- Add New Voiture Button -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
@@ -169,7 +181,8 @@ $categories = $GategoryController->getCategories();
                                 <td><?= $category['id_category']; ?></td>
                                 <td><?= $category['category_name'] ?></td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                                    <a href="../../views/Modifier_categorie__form.php?id=<?= $category['id_category']; ?>"
+                                        class="btn btn-warning btn-sm">Modifier</a>
                                     <a href="../../Controllers/Delete_Category.php?id=<?= $category['id_category']; ?>"
                                         class="btn btn-danger btn-sm"
                                         onclick="return confirm('Voulez-vous supprimer ce Categorie ?')">Supprimer</a>

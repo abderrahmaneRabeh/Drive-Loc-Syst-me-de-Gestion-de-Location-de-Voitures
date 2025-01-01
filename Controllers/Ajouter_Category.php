@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../Models/Database.php';
 require_once '../Models/Category.php';
 
@@ -37,9 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if ($tout_est_effectuer) {
-    header("Location: /dashboard/admin/categories.php?MsgAjout=L'ajout a fonctionner Succes");
+    $_SESSION["success"] = "Category ajouter avec success";
+    header("Location: /dashboard/admin/categories.php");
     exit;
 } else {
-    header("Location: /dashboard/admin/categories.php?MsgAjout=L'ajout a echouer");
+    $_SESSION["error"] = "Category non ajouter";
+    header("Location: /dashboard/admin/categories.php");
     exit;
 }

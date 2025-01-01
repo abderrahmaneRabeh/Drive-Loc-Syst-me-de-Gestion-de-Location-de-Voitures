@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once '../Models/Voiture.php';
 
 class Modifier_Voiture_Controller extends Voiture
@@ -9,6 +10,8 @@ class Modifier_Voiture_Controller extends Voiture
     }
 
 }
+
+$Modifier_Voiture_Controller = new Modifier_Voiture_Controller();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -22,13 +25,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $disponible = $_POST['disponible'];
     $category = $_POST['category'];
 
-    $Modifier_Voiture_Controller = new Modifier_Voiture_Controller();
     $result = $Modifier_Voiture_Controller->Modifier($id, $modele, $marque, $prixJournalier, $transmission, $couleur, $kilometrage, $voiture_img, $disponible, $category);
     if ($result) {
-        header("Location: /dashboard/admin/voiture.php?MsgUpdate=Voiture modifier avec success");
+        $_SESSION["success"] = "Voiture modifier avec success";
+        header("Location: /dashboard/admin/voiture.php");
         exit;
     } else {
-        header("Location: /dashboard/admin/voiture.php?MsgUpdate=Voiture non modifier");
+        $_SESSION["error"] = "Voiture non modifier";
+        header("Location: /dashboard/admin/voiture.php");
     }
 } else {
     echo "Error dans Traitement  de la requête";

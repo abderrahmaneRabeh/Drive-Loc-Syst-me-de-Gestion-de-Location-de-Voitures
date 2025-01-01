@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../Models/Database.php';
 require_once '../Models/Category.php';
 
@@ -16,10 +16,12 @@ $deleteCategoryController = new DeleteCategoryController();
 if (isset($_GET['id'])) {
     $result = $deleteCategoryController->Delete($_GET['id']);
     if ($result) {
-        header("Location: /dashboard/admin/categories.php?MsgDelete=Category supprimer avec success");
+        $_SESSION["success"] = "Category supprimer avec success";
+        header("Location: /dashboard/admin/categories.php");
         exit;
     } else {
-        header("Location: /dashboard/admin/categories.php?MsgDelete=L'ajout a echouer");
+        $_SESSION["error"] = "Category non supprimer";
+        header("Location: /dashboard/admin/categories.php");
         exit;
     }
 }
