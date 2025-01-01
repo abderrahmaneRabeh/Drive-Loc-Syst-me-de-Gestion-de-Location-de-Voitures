@@ -2,7 +2,6 @@
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
 require_once '../../Models/Voiture.php';
-// require_once '../../Controllers/ListVoitureController.php';
 
 Dashboard_admin_check_roleConnect();
 

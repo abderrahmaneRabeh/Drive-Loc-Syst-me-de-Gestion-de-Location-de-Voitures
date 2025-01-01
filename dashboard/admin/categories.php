@@ -1,7 +1,12 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
+require_once '../../Models/Voiture.php';
+require_once '../../Models/Category.php';
 Dashboard_admin_check_roleConnect();
+
+$GategoryController = new Category();
+$categories = $GategoryController->getCategories();
 
 
 ?>
@@ -143,8 +148,35 @@ Dashboard_admin_check_roleConnect();
                 </div>
             </div>
             <div class="products-area-wrapper tableView">
-
-
+                <!-- Add New Voiture Button -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 style="color: white;">Liste des Categories</h2>
+                    <a href="/views/Ajouter_categorie__form.php" class="btn"
+                        style="background-color: #fff; color: #000;">Ajouter une nouvelle
+                        Categorie</a>
+                </div>
+                <table class="table table-dark table-bordered table-hover">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom de Categories</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($categories as $category) { ?>
+                            <tr>
+                                <td><?= $category['id_category']; ?></td>
+                                <td><?= $category['category_name'] ?></td>
+                                <td class="text-center">
+                                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                                    <a href="#" class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Voulez-vous supprimer ce Categorie ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

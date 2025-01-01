@@ -1,0 +1,1 @@
+<?php echo "<h1>Ajouter une categorie</h1>";
