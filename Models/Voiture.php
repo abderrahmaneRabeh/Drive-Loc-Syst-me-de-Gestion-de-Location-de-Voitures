@@ -43,4 +43,24 @@ class Voiture extends Database
         $voiture = $query->fetch();
         return $voiture;
     }
+
+    public function Ajouter_Voiture($modele, $marque, $prixJournalier, $transmission, $couleur, $kilometrage, $voiture_img, $disponible, $category)
+    {
+        $query = $this->Conx_DataBase->prepare("INSERT INTO vehicule 
+        (modele, marque, prixJournalier, disponible, kilometrage, transmission, couleur, categorie_id, image_url) 
+        VALUES (:modele, :marque, :prixJournalier, :disponible, :kilometrage, :transmission, :couleur, :categorie_id, :image_url)");
+
+        $query->bindParam(':modele', $modele);
+        $query->bindParam(':marque', $marque);
+        $query->bindParam(':prixJournalier', $prixJournalier);
+        $query->bindParam(':disponible', $disponible);
+        $query->bindParam(':kilometrage', $kilometrage);
+        $query->bindParam(':transmission', $transmission);
+        $query->bindParam(':couleur', $couleur);
+        $query->bindParam(':categorie_id', $category);
+        $query->bindParam(':image_url', $voiture_img);
+        $query->execute();
+
+        return $query->rowCount();
+    }
 }

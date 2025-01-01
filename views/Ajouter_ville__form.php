@@ -1,7 +1,12 @@
 <?php
 session_start();
+require_once '../Controllers/ListCategories.php';
 require_once '../middleware/Check_user_connexion.php';
 Dashboard_admin_check_roleConnect();
+
+
+$GategoryController = new ListCategoriesController();
+$categories = $GategoryController->List_Categories();
 ?>
 
 <!DOCTYPE html>
@@ -10,9 +15,13 @@ Dashboard_admin_check_roleConnect();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Car</title>
+    <title>DRIVE-LOC -- Ajouter Voiture</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/assets/css/ajouterVoiture.css">
+
+    <link href="../assets/img/vendor-7.png" rel="icon">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
 </head>
 
 <body>
@@ -70,6 +79,17 @@ Dashboard_admin_check_roleConnect();
                                 <option value="">Is it available?</option>
                                 <option value="1">Oui</option>
                                 <option value="0">Non</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="disponible">Category</label>
+                            <select name="category[]" required>
+                                <option value="" selected>Choisissez une categorie</option>
+                                <?php foreach ($categories as $category): ?>
+                                    <option value="<?= $category['id_category'] ?>"><?= $category['category_name'] ?>
+                                    </option>
+                                <?php endforeach; ?>
+
                             </select>
                         </div>
                     </div>
