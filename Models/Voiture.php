@@ -37,7 +37,7 @@ class Voiture extends Database
 
     public function getOneVoiture($id)
     {
-        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule, categories WHERE id_vehivule = :id");
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule, categories WHERE id_vehivule = :id AND vehicule.categorie_id = categories.id_category");
         $query->bindParam(':id', $id);
         $query->execute();
         $voiture = $query->fetch();

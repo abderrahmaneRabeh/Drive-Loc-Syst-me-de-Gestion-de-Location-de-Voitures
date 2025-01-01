@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once '../Controllers/ListVoitureController.php';
 require_once '../Controllers/ListCategories.php';
 require_once '../middleware/Check_user_connexion.php';
 Dashboard_admin_check_roleConnect();
