@@ -24,11 +24,13 @@ class Voiture extends Database
         return $result['total'];
     }
 
-    public function getVoitures($page = 1)
+    public function getVoitures($page = 1, $recherche = "")
     {
+        $recherche = "%$recherche%";
         $offset = ($page - 1) * $this->lignes_par_page;
-        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule LIMIT :offset, :limit");
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule WHERE modele LIKE :recherche OR marque LIKE :recherche LIMIT :offset, :limit");
         $query->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $query->bindParam(':recherche', $recherche, PDO::PARAM_STR);
         $query->bindParam(':limit', var: $this->lignes_par_page, type: PDO::PARAM_INT);
         $query->execute();
         $listVoiture = $query->fetchAll();
@@ -91,4 +93,14 @@ class Voiture extends Database
         $query->execute();
         return $query->rowCount();
     }
+
+    // public function Rechercher_Voiture($recherche)
+    // {
+
+    //     $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule WHERE modele LIKE :recherche OR marque LIKE :recherche");
+    //     $query->bindValue(':recherche', $recherche, PDO::PARAM_STR);
+    //     $query->execute();
+    //     $voitures = $query->fetchAll();
+    //     return $voitures;
+    // }
 }

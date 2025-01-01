@@ -10,9 +10,15 @@ if (isset($_GET['page'])) {
 }
 
 Check_List_Voiture_Page();
-
 $ListVoitureController = new ListVoitureController();
-$listVoiture = $ListVoitureController->List_Voitures($page);
+$recherche = "";
+
+if (isset($_GET['search'])) {
+    $recherche = $_GET['search'];
+    $listVoiture = $ListVoitureController->List_Voitures($page, $recherche);
+} else {
+    $listVoiture = $ListVoitureController->List_Voitures($page, "");
+}
 
 $totalLignes = $ListVoitureController->Nbr_Voiture();
 $LigneParPage = $ListVoitureController->getLinesParPage();
@@ -175,6 +181,21 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
     <div class="container-fluid py-5">
         <div class="container pt-5 pb-3">
             <h1 class="display-4 text-uppercase text-center mb-5">Trouvez votre voiture</h1>
+            <form action="./List_Voitures.php" method="get">
+                <div class="input-group mb-3">
+                    <?php if (isset($_GET['search'])): ?>
+                        <input type="text" class="form-control" value="<?= $_GET['search'] ?>"
+                            placeholder="Rechercher une voiture" name="search">
+                    <?php else: ?>
+                        <input type="text" class="form-control" placeholder="Rechercher une voiture" name="search">
+                    <?php endif; ?>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+                        <button class="btn btn-secondary" type="button" id="clearBtn"><i
+                                class="fa fa-eraser"></i></button>
+                    </div>
+                </div>
+            </form>
             <div class="row">
                 <?php foreach ($listVoiture as $voiture): ?>
                     <div class="col-lg-4 col-md-6 mb-2" id="<?= $voiture['id_vehivule'] ?>">
@@ -208,51 +229,56 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
         </div>
     </div>
 
+
     <!-- Pagination Start -->
-    <div class="container-fluid pt-4 pb-3">
-        <div class="d-flex  justify-content-center">
-            <nav>
-                <ul class="pagination justify-content-center mb-0">
-                    <li class="page-item">
-                        <?php
-                        if ($page > 1) {
-                            $previous = $page - 1;
-                            echo "<a class='page-link' href='?page=$previous'><i class='fa fa-angle-double-left'></i></a>";
-                        } else {
-                            echo "<a class='page-link' href='?page=1'><i class='fa fa-angle-double-left'></i></a>";
-                        }
-                        ?>
-                    </li>
-                    <?php
-
-                    for ($i = 1; $i <= $LignesSelectioner; $i++) {
-                        if ($page == $i) {
-                            echo "<li class='page-item active'><a class='page-link' href='#'>$i<span class='sr-only'></span></a></li>";
-                        } else {
-                            echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
-                        }
-                    }
-
-                    ?>
-
-
-                    <li class="page-item">
+    <?php if ($recherche == ""): ?>
+        <div class="container-fluid pt-4 pb-3">
+            <div class="d-flex  justify-content-center">
+                <nav>
+                    <ul class="pagination justify-content-center mb-0">
+                        <li class="page-item">
+                            <?php
+                            if ($page > 1) {
+                                $previous = $page - 1;
+                                echo "<a class='page-link' href='?page=$previous'><i class='fa fa-angle-double-left'></i></a>";
+                            } else {
+                                echo "<a class='page-link' href='?page=1'><i class='fa fa-angle-double-left'></i></a>";
+                            }
+                            ?>
+                        </li>
                         <?php
 
-                        if ($page < $LignesSelectioner) {
-                            $suivant = $page + 1;
-                            echo "<a class='page-link' href='?page=$suivant'><i class='fa fa-angle-double-right'></i></a>";
-                        } else {
-                            echo "<a class='page-link' href='?page=$LignesSelectioner'><i class='fa fa-angle-double-right'></i></a>";
-
+                        for ($i = 1; $i <= $LignesSelectioner; $i++) {
+                            if ($page == $i) {
+                                echo "<li class='page-item active'><a class='page-link' href='#'>$i<span class='sr-only'></span></a></li>";
+                            } else {
+                                echo "<li class='page-item'><a class='page-link' href='?page=$i'>$i</a></li>";
+                            }
                         }
 
                         ?>
-                    </li>
-                </ul>
-            </nav>
+
+
+                        <li class="page-item">
+                            <?php
+
+                            if ($page < $LignesSelectioner) {
+                                $suivant = $page + 1;
+                                echo "<a class='page-link' href='?page=$suivant'><i class='fa fa-angle-double-right'></i></a>";
+                            } else {
+                                echo "<a class='page-link' href='?page=$LignesSelectioner'><i class='fa fa-angle-double-right'></i></a>";
+
+                            }
+
+                            ?>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </div>
+    <?php else: ?>
+        <div></div>
+    <?php endif; ?>
     <!-- Pagination End -->
 
     <!-- Rent A Car End -->
@@ -325,6 +351,20 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
+    <script>
+        let input = document.querySelector('input[name="search"]');
+
+        let clearBtn = document.getElementById('clearBtn');
+
+        clearBtn.addEventListener('click', () => {
+            console.log("clicked");
+
+
+            input.value = '';
+            window.location.href = 'http://drive_loc-gestion_vehicules.test/views/List_Voitures.php';
+        });
+
+    </script>
 </body>
 
 </html>
