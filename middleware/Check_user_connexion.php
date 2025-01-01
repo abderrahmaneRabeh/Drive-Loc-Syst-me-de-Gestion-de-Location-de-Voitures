@@ -38,3 +38,11 @@ function Dashboard_client_check_roleConnect()
     }
 }
 
+function AjouterFormCheck()
+{
+    if (!isset($_SESSION['user']) || $_SESSION['role'] != 1) {
+        header("Location: ../views/Se_connecter.php?msg=veuillez vous connecter pour accéder à la page");
+        exit;
+    }
+}
+

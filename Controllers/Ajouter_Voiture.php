@@ -10,6 +10,7 @@ class Ajouter_Voiture_Controller extends Voiture
     }
 }
 
+$Ajouter_Voiture_Controller = new Ajouter_Voiture_Controller();
 $tout_est_effectuer = true;
 
 
@@ -24,7 +25,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $disponible = $_POST['disponible'];
     $category = $_POST['category'];
 
-    // You can access each value like this:
     foreach ($modele as $key => $value) {
         $modele_value = $value;
         $marque_value = $marque[$key];
@@ -36,7 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $disponible_value = $disponible[$key];
         $category_value = $category[$key];
 
-        $Ajouter_Voiture_Controller = new Ajouter_Voiture_Controller();
         $result = $Ajouter_Voiture_Controller->Ajouter($modele_value, $marque_value, $prixJournalier_value, $transmission_value, $couleur_value, $kilometrage_value, $voiture_img_value, $disponible_value, $category_value);
         if ($result == 0) {
             $tout_est_effectuer = false;

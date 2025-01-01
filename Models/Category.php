@@ -17,4 +17,29 @@ class Category extends Database
         return $categories;
     }
 
+    public function get_One_Category($id)
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM categories WHERE id_category = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        $category = $query->fetch();
+        return $category;
+    }
+
+    public function Ajouter_Category($category_name)
+    {
+        $query = $this->Conx_DataBase->prepare("INSERT INTO categories (category_name) VALUES (:category_name)");
+        $query->bindParam(':category_name', $category_name);
+        $query->execute();
+        return $query->rowCount();
+    }
+
+    public function DeleteCategory($id)
+    {
+        $query = $this->Conx_DataBase->prepare("DELETE FROM categories WHERE id_category = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->rowCount();
+    }
+
 }

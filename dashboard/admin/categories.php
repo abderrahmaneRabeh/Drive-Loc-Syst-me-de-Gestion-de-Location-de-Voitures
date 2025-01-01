@@ -170,7 +170,8 @@ $categories = $GategoryController->getCategories();
                                 <td><?= $category['category_name'] ?></td>
                                 <td class="text-center">
                                     <a href="#" class="btn btn-warning btn-sm">Modifier</a>
-                                    <a href="#" class="btn btn-danger btn-sm"
+                                    <a href="../../Controllers/Delete_Category.php?id=<?= $category['id_category']; ?>"
+                                        class="btn btn-danger btn-sm"
                                         onclick="return confirm('Voulez-vous supprimer ce Categorie ?')">Supprimer</a>
                                 </td>
                             </tr>

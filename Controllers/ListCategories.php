@@ -8,4 +8,9 @@ class ListCategoriesController extends Category
         $categories = $this->getCategories();
         return $categories;
     }
+
+    public function getOneCategory($id)
+    {
+        return $this->get_One_Category($id);
+    }
 }
