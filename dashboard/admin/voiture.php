@@ -29,7 +29,7 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Categories</title>
+    <title>Dashboard - Voiture</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
@@ -204,16 +204,17 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="./edit.php?id=<?= $voiture['id_vehivule']; ?>"
-                                        class="btn btn-warning btn-sm">Modifier</a>
-                                    <a href="./delete.php?id=<?= $voiture['id_vehivule']; ?>"
-                                        class="btn btn-danger btn-sm">Supprimer</a>
+                                    <a href="#" class="btn btn-warning btn-sm">Modifier</a>
+                                    <a href="/Controllers/Delete_Voiture.php?id=<?= $voiture['id_vehivule']; ?>"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Voulez-vous supprimer ce véhicule ?')">Supprimer</a>
                                 </td>
                             </tr>
                         <?php } ?>
                     </tbody>
                 </table>
 
+                <!-- Pagination -->
                 <div class="container-fluid pt-4 pb-3">
                     <div class="d-flex justify-content-center">
                         <nav>
@@ -253,11 +254,6 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                 </div>
 
             </div>
-
-            <!-- Pagination -->
-
-
-
         </div>
     </div>
 

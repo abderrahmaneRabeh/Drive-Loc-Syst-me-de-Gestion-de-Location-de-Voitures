@@ -63,4 +63,12 @@ class Voiture extends Database
 
         return $query->rowCount();
     }
+
+    public function Delete_Voiture($id)
+    {
+        $query = $this->Conx_DataBase->prepare("DELETE FROM vehicule WHERE id_vehivule = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->rowCount();
+    }
 }
