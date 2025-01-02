@@ -263,6 +263,16 @@ if (isset($_GET['id'])) {
 
                         <?php if ($isClientReserved): ?>
                             <h4 class="text-primary text-center mb-4">Évaluer ce véhicule</h4>
+                            <?php
+                            if (isset($_SESSION["errorAvis"])) {
+                                echo "<div class=\"alert alert-danger\">" . $_SESSION["errorAvis"] . "</div>";
+                                unset($_SESSION["errorAvis"]);
+                            }
+                            if (isset($_SESSION["successAvis"])) {
+                                echo "<div class=\"alert alert-success\">" . $_SESSION["successAvis"] . "</div>";
+                                unset($_SESSION["successAvis"]);
+                            }
+                            ?>
                             <form action="../Controllers/RateVoiture.php" method="POST">
                                 <input type="hidden" name="id_voiture" value="<?= $voiture['id_vehivule'] ?>">
 
