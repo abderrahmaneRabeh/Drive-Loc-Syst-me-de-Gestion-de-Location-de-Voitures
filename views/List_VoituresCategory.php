@@ -180,6 +180,11 @@ $listVoiture = $voituresController->All_Voitures();
                     </div>
                 <?php endforeach; ?>
             </div>
+            <div class="text-center mt-4">
+                <button class="btn btn-secondary  px-5" onclick="window.location.reload();">Voir
+                    Tous</button>
+            </div>
+
         </div>
     </div>
 
