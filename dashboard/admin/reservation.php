@@ -29,8 +29,8 @@ $listVoiture = $reservation->getAllReservations();
 <style>
     select {
         width: 100%;
-        padding: 2px 5px;
-        margin: 5px 0;
+        padding: 2px 3px;
+        margin: 3px 0;
         border: 1px solid #ccc;
         border-radius: 4px;
         background-color: #f9f9f9;
@@ -202,26 +202,33 @@ $listVoiture = $reservation->getAllReservations();
                                 <td><?= $voiture['lieuRetour']; ?></td>
                                 <td class="text-center"><?= $voiture['dateCreation']; ?></td>
                                 <td>
-                                    <form action="/Controllers/UpdateStatut.php" method="POST">
-                                        <select name="statut" onchange="this.form.submit()">
-                                            <?php if ($voiture['statut'] === 'en attente'): ?>
-                                                <option value="en attente" selected>En attente</option>
-                                            <?php else: ?>
-                                                <option value="en attente">En attente</option>
-                                            <?php endif; ?>
-                                            <?php if ($voiture['statut'] === 'confirmé'): ?>
-                                                <option value="confirmé" selected>Confirmé</option>
-                                            <?php else: ?>
-                                                <option value="confirmé">Confirmé</option>
-                                            <?php endif; ?>
-                                            <?php if ($voiture['statut'] === 'annulé'): ?>
-                                                <option value="annulé" selected>Annulé</option>
-                                            <?php else: ?>
-                                                <option value="annulé">Annulé</option>
-                                            <?php endif; ?>
-                                        </select>
-                                        <input type="hidden" name="id_vehivule" value="<?= $voiture['id_reservation']; ?>">
-                                    </form>
+                                    <?php if ($voiture['statut'] == "Confirmee"): ?>
+                                        <span class="badge badge-success p-2">Confirmé</span>
+
+                                    <?php elseif ($voiture['statut'] == "Annulee"): ?>
+                                        <span class="badge badge-danger p-2">Annulé</span>
+                                    <?php else: ?>
+                                        <form action="/Controllers/UpdateStatut.php" method="POST">
+                                            <select name="statut" onchange="this.form.submit()">
+                                                <?php if ($voiture['statut'] === 'en attente'): ?>
+                                                    <option value="en attente" selected>En attente</option>
+                                                <?php else: ?>
+                                                    <option value="en attente">En attente</option>
+                                                <?php endif; ?>
+                                                <?php if ($voiture['statut'] === 'Confirmee'): ?>
+                                                    <option value="Confirmee" selected>Confirmé</option>
+                                                <?php else: ?>
+                                                    <option value="Confirmee">Confirmé</option>
+                                                <?php endif; ?>
+                                                <?php if ($voiture['statut'] === 'Annulee'): ?>
+                                                    <option value="Annulee" selected>Annulé</option>
+                                                <?php else: ?>
+                                                    <option value="Annulee">Annulé</option>
+                                                <?php endif; ?>
+                                            </select>
+                                            <input type="hidden" name="id_vehivule" value="<?= $voiture['id_reservation']; ?>">
+                                        </form>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="text-center">
                                     <a href="/Controllers/Delete_Reservation.php?id=<?= $voiture['id_reservation']; ?>"

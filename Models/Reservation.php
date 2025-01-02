@@ -38,4 +38,13 @@ class Reservation extends Database
         $query->execute();
         return $query->rowCount();
     }
+
+    public function UpdateSatutReservation($id, $statut)
+    {
+        $query = $this->Conx_DataBase->prepare("UPDATE reservations SET statut = :statut WHERE id_reservation = :id");
+        $query->bindParam(':id', $id);
+        $query->bindParam(':statut', $statut);
+        $query->execute();
+        return $query->rowCount();
+    }
 }
