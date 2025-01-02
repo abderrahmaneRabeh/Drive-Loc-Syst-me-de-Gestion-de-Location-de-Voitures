@@ -32,6 +32,8 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
+    <link href="/assets/img/vendor-7.png" rel="icon">
+
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">
@@ -112,6 +114,17 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                             <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
                         </svg>
                         <span>Statistiques</span>
+                    </a>
+                </li>
+                <li class="sidebar-list-item">
+                    <a href="./avis.php">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="feather feather-message-circle">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8.56 4.38A8 8 0 0 0 1 12h6.14l1.98-2.96L8.56 4.38z" />
+                        </svg>
+                        <span>Avis</span>
                     </a>
                 </li>
             </ul>

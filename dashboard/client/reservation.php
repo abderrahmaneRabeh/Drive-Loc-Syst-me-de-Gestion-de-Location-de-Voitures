@@ -16,6 +16,8 @@ Dashboard_client_check_roleConnect();
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
+    <link href="/assets/img/vendor-7.png" rel="icon">
+
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/font-awesome.css">

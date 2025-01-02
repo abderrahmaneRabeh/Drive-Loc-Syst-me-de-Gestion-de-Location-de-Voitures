@@ -1,11 +1,8 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
-require_once '../../Models/Reservation.php';
 Dashboard_admin_check_roleConnect();
 
-$reservation = new Reservation();
-$listVoiture = $reservation->getAllReservations();
 
 ?>
 <!DOCTYPE html>
@@ -14,11 +11,10 @@ $listVoiture = $reservation->getAllReservations();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Reservation</title>
+    <title>Dashboard - Statistique</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
-
     <link href="/assets/img/vendor-7.png" rel="icon">
 
 
@@ -28,25 +24,6 @@ $listVoiture = $reservation->getAllReservations();
     <link rel="stylesheet" href="../css/Reservation.css">
 
 </head>
-
-<style>
-    select {
-        width: 100%;
-        padding: 2px 3px;
-        margin: 3px 0;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        background-color: #f9f9f9;
-        color: #333;
-        font-size: 16px;
-    }
-
-    select:focus {
-        border-color: #007bff;
-        outline: none;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    }
-</style>
 
 <body>
 
@@ -97,7 +74,7 @@ $listVoiture = $reservation->getAllReservations();
                         <span>Categories</span>
                     </a>
                 </li>
-                <li class="sidebar-list-item active">
+                <li class="sidebar-list-item">
                     <a href="./reservation.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -120,7 +97,7 @@ $listVoiture = $reservation->getAllReservations();
                         <span>Statistiques</span>
                     </a>
                 </li>
-                <li class="sidebar-list-item">
+                <li class="sidebar-list-item active">
                     <a href="./avis.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -141,7 +118,8 @@ $listVoiture = $reservation->getAllReservations();
                     echo '<li class="scroll-to-section"><a href="./pages/login.php" id="login">S\'inscrire</a></li>';
                 }
 
-                ?> <a href="../../controllers/lougout.php" class="account-info-more lougout-btn">
+                ?>
+                <a href="../../controllers/lougout.php" class="account-info-more lougout-btn">
                     <button class="account-info-more"
                         style="display: flex; align-items: center; justify-content: center;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -157,7 +135,7 @@ $listVoiture = $reservation->getAllReservations();
         </div>
         <div class="app-content">
             <div class="app-content-header">
-                <h1 class="app-content-headerText">Reservation</h1>
+                <h1 class="app-content-headerText">Statistiques</h1>
                 <button class="mode-switch" title="Switch Theme">
                     <svg class="moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" width="24" height="24" viewBox="0 0 24 24">
@@ -177,83 +155,9 @@ $listVoiture = $reservation->getAllReservations();
                     </button>
                 </div>
             </div>
-            <div class="alert-wrapper">
-                <?php
-                if (isset($_SESSION["success"])) {
-                    echo "<div class=\"alert alert-success\">" . $_SESSION["success"] . "</div>";
-                    unset($_SESSION["success"]);
-                }
-                if (isset($_SESSION["error"])) {
-                    echo "<div class=\"alert alert-danger\">" . $_SESSION["error"] . "</div>";
-                    unset($_SESSION["error"]);
-                }
-                ?>
-            </div>
             <div class="products-area-wrapper tableView">
-                <!-- start Table -->
-                <table class="table table-dark table-bordered table-hover" style="font-size: 13px">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>Client</th>
-                            <th>vehicule</th>
-                            <th>dateDebut</th>
-                            <th>dateFin</th>
-                            <th>lieuPriseCharge</th>
-                            <th>lieuRetour</th>
-                            <th>Date de Reservation</th>
-                            <th class="text-center">statut</th>
-                            <th class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($listVoiture as $voiture): ?>
-                            <tr>
-                                <td><?= $voiture['username'] ?></td>
-                                <td><?= $voiture['marque']; ?>     <?= $voiture['modele']; ?></td>
-                                <td><?= $voiture['dateDebut']; ?></td>
-                                <td><?= $voiture['dateFin']; ?></td>
-                                <td><?= $voiture['lieuPriseCharge']; ?></td>
-                                <td><?= $voiture['lieuRetour']; ?></td>
-                                <td class="text-center"><?= $voiture['dateCreation']; ?></td>
-                                <td>
-                                    <?php if ($voiture['statut'] == "Confirmee"): ?>
-                                        <span class="badge badge-success p-2">Confirmé</span>
 
-                                    <?php elseif ($voiture['statut'] == "Annulee"): ?>
-                                        <span class="badge badge-danger p-2">Annulé</span>
-                                    <?php else: ?>
-                                        <form action="/Controllers/UpdateStatut.php" method="POST">
-                                            <select name="statut" onchange="this.form.submit()">
-                                                <?php if ($voiture['statut'] === 'en attente'): ?>
-                                                    <option value="en attente" selected>En attente</option>
-                                                <?php else: ?>
-                                                    <option value="en attente">En attente</option>
-                                                <?php endif; ?>
-                                                <?php if ($voiture['statut'] === 'Confirmee'): ?>
-                                                    <option value="Confirmee" selected>Confirmé</option>
-                                                <?php else: ?>
-                                                    <option value="Confirmee">Confirmé</option>
-                                                <?php endif; ?>
-                                                <?php if ($voiture['statut'] === 'Annulee'): ?>
-                                                    <option value="Annulee" selected>Annulé</option>
-                                                <?php else: ?>
-                                                    <option value="Annulee">Annulé</option>
-                                                <?php endif; ?>
-                                            </select>
-                                            <input type="hidden" name="id_vehivule" value="<?= $voiture['id_reservation']; ?>">
-                                        </form>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-center">
-                                    <a href="/Controllers/Delete_Reservation.php?id=<?= $voiture['id_reservation']; ?>"
-                                        class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <!-- end Table -->
+
             </div>
         </div>
     </div>
