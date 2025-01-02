@@ -1,7 +1,12 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
+require_once '../../Models/Avis.php';
 Dashboard_admin_check_roleConnect();
+
+$avis = new Avis();
+
+$list_avis = $avis->getAllAvis();
 
 
 ?>
@@ -14,6 +19,8 @@ Dashboard_admin_check_roleConnect();
     <title>Dashboard - Statistique</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
     <script defer src="../js/main.js"></script>
     <link href="/assets/img/vendor-7.png" rel="icon">
 
@@ -51,14 +58,14 @@ Dashboard_admin_check_roleConnect();
                     </a>
                 </li>
                 <li class="sidebar-list-item">
-                    <a href="./voiture.php">
+                    <a href="./avis.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="feather feather-car">
                             <path d="M15 10l-3 3h8l-1.5 1.5L15 10z" />
                             <path d="M10 8h4L10 2 6 8h4l-2 2z" />
                         </svg>
-                        <span>Voiture</span>
+                        <span>Avis</span>
                     </a>
                 </li>
                 <li class="sidebar-list-item">
@@ -155,9 +162,54 @@ Dashboard_admin_check_roleConnect();
                     </button>
                 </div>
             </div>
+            <div class="alert-wrapper">
+                <?php
+                if (isset($_SESSION["success"])) {
+                    echo "<div class=\"alert alert-success\">" . $_SESSION["success"] . "</div>";
+                    unset($_SESSION["success"]);
+                }
+                if (isset($_SESSION["error"])) {
+                    echo "<div class=\"alert alert-danger\">" . $_SESSION["error"] . "</div>";
+                    unset($_SESSION["error"]);
+                }
+                ?>
+            </div>
             <div class="products-area-wrapper tableView">
-
-
+                <!-- start Table -->
+                <table class="table table-dark table-bordered table-hover" style="font-size: 13px">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>vehicule</th>
+                            <th>client</th>
+                            <th>contenu</th>
+                            <th>note</th>
+                            <th>date</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($list_avis as $avis): ?>
+                            <?php if ($avis['estSupprime'] == 0): ?>
+                                <tr>
+                                    <td><?= $avis['id_avis']; ?></td>
+                                    <td><?= $avis['marque']; ?>         <?= $avis['modele']; ?></td>
+                                    <td><?= $avis['username']; ?></td>
+                                    <td><?= $avis['contenu']; ?></td>
+                                    <td><?php for ($i = 0; $i < $avis['note']; $i++)
+                                        echo '<i class="fas fa-star"></i>'; ?></td>
+                                    <td class="text-center"><?= $avis['date']; ?></td>
+                                    <td class="text-center">
+                                        <a href="/Controllers/Delete_Avis.php?id=<?= $avis['id_avis']; ?>"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <!-- end Table -->
             </div>
         </div>
     </div>

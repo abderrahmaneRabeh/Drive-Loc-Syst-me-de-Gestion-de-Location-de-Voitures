@@ -281,11 +281,11 @@ if (isset($_GET['id'])) {
                                     <label for="rating">Note</label>
                                     <select name="rating" id="rating" class="form-control" required>
                                         <option value="" selected disabled>Choisissez une note</option>
-                                        <option value="1">1 étoile</option>
-                                        <option value="2">2 étoiles</option>
-                                        <option value="3">3 étoiles</option>
-                                        <option value="4">4 étoiles</option>
-                                        <option value="5">5 étoiles</option>
+                                        <option value="1">&#9733; </option>
+                                        <option value="2">&#9733; &#9733;</option>
+                                        <option value="3">&#9733; &#9733; &#9733;</option>
+                                        <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+                                        <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
                                     </select>
                                 </div>
 

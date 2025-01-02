@@ -1,12 +1,11 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
-require_once '../../Models/Reservation.php';
-
+require_once '../../Models/Avis.php';
 Dashboard_client_check_roleConnect();
-$id = $_SESSION['user']['id_utilisateur'];
-$Reservation = new Reservation();
-$listReservation = $Reservation->getUserReservation($id);
+
+$avis = new Avis();
+$list_avis = $avis->getUserAvis($_SESSION['user']['id_utilisateur']);
 
 
 ?>
@@ -17,11 +16,12 @@ $listReservation = $Reservation->getUserReservation($id);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Reservation</title>
+    <title>Dashboard - Avis</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
     <link href="/assets/img/vendor-7.png" rel="icon">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
 
 
     <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
@@ -56,7 +56,7 @@ $listReservation = $Reservation->getUserReservation($id);
                         <span>Acceuil</span>
                     </a>
                 </li>
-                <li class="sidebar-list-item active">
+                <li class="sidebar-list-item ">
                     <a href="./reservation.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -69,7 +69,7 @@ $listReservation = $Reservation->getUserReservation($id);
                         <span>Reservations</span>
                     </a>
                 </li>
-                <li class="sidebar-list-item">
+                <li class="sidebar-list-item active">
                     <a href="./avis.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -146,54 +146,39 @@ $listReservation = $Reservation->getUserReservation($id);
                 <table class="table table-dark table-bordered table-hover" style="font-size: 13px">
                     <thead class="thead-light">
                         <tr>
-                            <th>Client</th>
+                            <th>#</th>
                             <th>vehicule</th>
-                            <th>dateDebut</th>
-                            <th>dateFin</th>
-                            <th>lieuPriseCharge</th>
-                            <th>lieuRetour</th>
-                            <th>Date de Reservation</th>
-                            <th class="text-center">statut</th>
+                            <th>client</th>
+                            <th>contenu</th>
+                            <th>note</th>
+                            <th>date</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($listReservation as $reservation): ?>
-                            <tr>
-                                <td><?= $reservation['username'] ?></td>
-                                <td><?= $reservation['marque']; ?>     <?= $reservation['modele']; ?></td>
-                                <td><?= $reservation['dateDebut']; ?></td>
-                                <td><?= $reservation['dateFin']; ?></td>
-                                <td><?= $reservation['lieuPriseCharge']; ?></td>
-                                <td><?= $reservation['lieuRetour']; ?></td>
-                                <td class="text-center"><?= $reservation['dateCreation']; ?></td>
-                                <td>
-                                    <?php if ($reservation['statut'] == "Confirmee"): ?>
-                                        <span class="badge badge-success p-2">Confirmé</span>
-
-                                    <?php elseif ($reservation['statut'] == "Annulee"): ?>
-                                        <span class="badge badge-danger p-2">Annulé</span>
-                                    <?php else: ?>
-                                        <span class="badge badge-warning p-2">En attente</span>
-                                    <?php endif; ?>
-                                </td>
-                                <td class="text-center">
-                                    <?php if ($reservation['statut'] == "En attente"): ?>
-                                        <a href="/views/Update_Reservation__form.php?id=<?= $reservation['id_reservation']; ?>"
-                                            class="btn btn-primary btn-sm">Modifier</a>
-                                    <?php endif; ?>
-                                    <a href="/Controllers/Delete_ReservationClient.php?id=<?= $reservation['id_reservation']; ?>"
-                                        class="btn btn-danger btn-sm"
-                                        onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Annuler</a>
-                                </td>
-                            </tr>
+                        <?php foreach ($list_avis as $avis): ?>
+                            <?php if ($avis['estSupprime'] == 0): ?>
+                                <tr>
+                                    <td><?= $avis['id_avis']; ?></td>
+                                    <td><?= $avis['marque']; ?>         <?= $avis['modele']; ?></td>
+                                    <td><?= $avis['username']; ?></td>
+                                    <td><?= $avis['contenu']; ?></td>
+                                    <td><?php for ($i = 0; $i < $avis['note']; $i++)
+                                        echo '<i class="fas fa-star"></i>'; ?></td>
+                                    <td class="text-center"><?= $avis['date']; ?></td>
+                                    <td class="text-center">
+                                        <a href="/Controllers/Delete_AvisClient.php?id=<?= $avis['id_avis']; ?>"
+                                            class="btn btn-danger btn-sm"
+                                            onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
+                                    </td>
+                                </tr>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
                 <!-- end Table -->
             </div>
         </div>
-    </div>
 
 </body>
 
