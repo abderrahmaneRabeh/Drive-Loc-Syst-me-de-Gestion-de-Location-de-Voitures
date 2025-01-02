@@ -201,9 +201,16 @@ if (isset($_GET['id'])) {
                 <!-- Reservation Form -->
                 <div class="col-lg-4">
                     <div class="bg-white shadow p-4 rounded">
-                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
+                        <?php if (isset($_SESSION['user'])): ?>
                             <h3 class="text-primary text-center mb-4">Réserver ce véhicule</h3>
-                            <form action="reserve_vehicle.php" method="POST">
+                            <?php
+                            if (isset($_SESSION["error"])) {
+                                echo "<div class=\"alert alert-danger\">" . $_SESSION["error"] . "</div>";
+                                unset($_SESSION["error"]);
+                            }
+                            ?>
+                            <form action="../Controllers/AjouterReservation.php" method="POST">
+                                <input type="hidden" name="id_voiture" value="<?= $voiture['id_vehivule'] ?>">
                                 <!-- Date début -->
                                 <div class="form-group">
                                     <label for="dateDebut">Date de début</label>
