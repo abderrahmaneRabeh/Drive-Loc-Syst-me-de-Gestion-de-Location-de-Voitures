@@ -182,7 +182,7 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                         Voiture</a>
                 </div>
 
-                <!-- Enhanced Table -->
+                <!-- start Table -->
                 <table class="table table-dark table-bordered table-hover">
                     <thead class="thead-light">
                         <tr>
@@ -225,7 +225,7 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                         <?php } ?>
                     </tbody>
                 </table>
-
+                <!-- end Table -->
                 <!-- Pagination -->
                 <div class="container-fluid pt-4 pb-3">
                     <div class="d-flex justify-content-center">

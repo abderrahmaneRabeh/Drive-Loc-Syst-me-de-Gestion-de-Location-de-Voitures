@@ -1,8 +1,11 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
+require_once '../../Models/Reservation.php';
 Dashboard_admin_check_roleConnect();
 
+$reservation = new Reservation();
+$listVoiture = $reservation->getAllReservations();
 
 ?>
 <!DOCTYPE html>
@@ -22,6 +25,25 @@ Dashboard_admin_check_roleConnect();
     <link rel="stylesheet" href="../css/Reservation.css">
 
 </head>
+
+<style>
+    select {
+        width: 100%;
+        padding: 2px 5px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        color: #333;
+        font-size: 16px;
+    }
+
+    select:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+</style>
 
 <body>
 
@@ -141,9 +163,76 @@ Dashboard_admin_check_roleConnect();
                     </button>
                 </div>
             </div>
+            <div class="alert-wrapper">
+                <?php
+                if (isset($_SESSION["success"])) {
+                    echo "<div class=\"alert alert-success\">" . $_SESSION["success"] . "</div>";
+                    unset($_SESSION["success"]);
+                }
+                if (isset($_SESSION["error"])) {
+                    echo "<div class=\"alert alert-danger\">" . $_SESSION["error"] . "</div>";
+                    unset($_SESSION["error"]);
+                }
+                ?>
+            </div>
             <div class="products-area-wrapper tableView">
-
-
+                <!-- start Table -->
+                <table class="table table-dark table-bordered table-hover" style="font-size: 13px">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Client</th>
+                            <th>vehicule</th>
+                            <th>dateDebut</th>
+                            <th>dateFin</th>
+                            <th>lieuPriseCharge</th>
+                            <th>lieuRetour</th>
+                            <th>Date de Reservation</th>
+                            <th class="text-center">statut</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($listVoiture as $voiture): ?>
+                            <tr>
+                                <td><?= $voiture['username'] ?></td>
+                                <td><?= $voiture['marque']; ?>     <?= $voiture['modele']; ?></td>
+                                <td><?= $voiture['dateDebut']; ?></td>
+                                <td><?= $voiture['dateFin']; ?></td>
+                                <td><?= $voiture['lieuPriseCharge']; ?></td>
+                                <td><?= $voiture['lieuRetour']; ?></td>
+                                <td class="text-center"><?= $voiture['dateCreation']; ?></td>
+                                <td>
+                                    <form action="/Controllers/UpdateStatut.php" method="POST">
+                                        <select name="statut" onchange="this.form.submit()">
+                                            <?php if ($voiture['statut'] === 'en attente'): ?>
+                                                <option value="en attente" selected>En attente</option>
+                                            <?php else: ?>
+                                                <option value="en attente">En attente</option>
+                                            <?php endif; ?>
+                                            <?php if ($voiture['statut'] === 'confirmé'): ?>
+                                                <option value="confirmé" selected>Confirmé</option>
+                                            <?php else: ?>
+                                                <option value="confirmé">Confirmé</option>
+                                            <?php endif; ?>
+                                            <?php if ($voiture['statut'] === 'annulé'): ?>
+                                                <option value="annulé" selected>Annulé</option>
+                                            <?php else: ?>
+                                                <option value="annulé">Annulé</option>
+                                            <?php endif; ?>
+                                        </select>
+                                        <input type="hidden" name="id_vehivule" value="<?= $voiture['id_reservation']; ?>">
+                                    </form>
+                                </td>
+                                <td class="text-center">
+                                    <a href="/Controllers/Delete_Reservation.php?id=<?= $voiture['id_reservation']; ?>"
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+                <!-- end Table -->
             </div>
         </div>
     </div>
