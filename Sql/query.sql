@@ -61,3 +61,26 @@ CREATE TABLE reservations (
 );
 
 
+-- procedure stoked
+
+DROP PROCEDURE IF EXISTS inserer_reservation;
+DELIMITER $$
+CREATE PROCEDURE inserer_reservation(
+    IN p_client_id INT,
+    IN p_vehicule_id INT,
+    IN p_dateDebut DATE,
+    IN p_dateFin DATE,
+    IN p_lieuPriseCharge VARCHAR(255),
+    IN p_lieuRetour VARCHAR(255),
+    IN statut VARCHAR(255)
+)
+BEGIN
+    INSERT INTO reservations (client_id, vehicule_id, dateDebut, dateFin, lieuPriseCharge, lieuRetour,statut)
+    VALUES (p_client_id, p_vehicule_id, p_dateDebut, p_dateFin, p_lieuPriseCharge, p_lieuRetour,statut);
+END $$
+
+DELIMITER ;
+
+-- pour tester
+
+CALL inserer_reservation(2, 1, '2024-11-25', '2024-11-28', 'Gare de Lyon', 'Aéroport Charles de Gaulle','En attente');
