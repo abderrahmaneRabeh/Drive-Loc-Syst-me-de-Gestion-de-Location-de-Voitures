@@ -24,6 +24,14 @@ class Voiture extends Database
         return $result['total'];
     }
 
+    public function All_Voitures()
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule");
+        $query->execute();
+        $listVoiture = $query->fetchAll();
+        return $listVoiture;
+    }
+
     public function getVoitures($page = 1, $recherche = "")
     {
         $recherche = "%$recherche%";

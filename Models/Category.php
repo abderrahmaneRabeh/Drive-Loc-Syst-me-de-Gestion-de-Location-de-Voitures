@@ -50,4 +50,13 @@ class Category extends Database
         $query->execute();
         return $query->rowCount();
     }
+
+    public function All_VoituresByCategory($id_category = null)
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule WHERE categorie_id = :id_category");
+        $query->bindParam(':id_category', $id_category);
+        $query->execute();
+        $listVoiture = $query->fetchAll();
+        return $listVoiture;
+    }
 }

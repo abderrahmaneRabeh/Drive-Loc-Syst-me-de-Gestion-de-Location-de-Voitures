@@ -894,3 +894,14 @@ a {
 .menu-card-footer {
   margin-top: 15px;
 }
+
+.list_voiture {
+  & img {
+    width: 100%;
+    height: 200px;
+  }
+
+  & .list_link {
+    text-decoration: none;
+  }
+}

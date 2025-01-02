@@ -1,0 +1,71 @@
+button {
+    border: none;
+    background-color: transparent;
+}
+
+.horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    /* Active le défilement horizontal */
+    gap: 15px;
+    /* Espacement entre les éléments */
+    padding: 10px;
+    scrollbar-width: thin;
+    /* Réduit la largeur de la scrollbar pour Firefox */
+    scrollbar-color: darkblue #f1f1f1;
+    /* Couleur de la barre de défilement */
+}
+
+.horizontal-scroll::-webkit-scrollbar {
+    height: 8px;
+    /* Hauteur de la scrollbar */
+}
+
+.horizontal-scroll::-webkit-scrollbar-thumb {
+    background-color: #00bcd4;
+    /* Couleur de la barre de défilement */
+    border-radius: 10px;
+}
+
+.horizontal-scroll::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+    /* Couleur de l'arrière-plan de la barre */
+}
+
+.category-box {
+    flex: 0 0 auto;
+    /* Assure que chaque catégorie conserve ses dimensions */
+    width: 10rem;
+    height: 5rem;
+    /* Hauteur réduite à 5rem */
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    /* Dégradé moderne */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.category-box:hover {
+    transform: translateY(-5px);
+    /* Légère élévation au survol */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.category-link {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.category-link:hover {
+    color: #00bcd4;
+    /* Couleur d'accent au survol */
+}

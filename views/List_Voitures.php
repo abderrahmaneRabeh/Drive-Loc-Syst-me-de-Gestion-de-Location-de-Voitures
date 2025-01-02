@@ -200,7 +200,7 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                 <?php foreach ($listVoiture as $voiture): ?>
                     <div class="col-lg-4 col-md-6 mb-2" id="<?= $voiture['id_vehivule'] ?>">
                         <div class="rent-item mb-4 list_voiture">
-                            <img class="img-fluid mb-4" src="<?= $voiture['image_url'] ?>" alt="">
+                            <img class="img-fluid mb-4" src="<?= $voiture['image_url'] ?>" alt="<?= $voiture['modele'] ?>">
                             <a href="./Voiture_details.php?id=<?= $voiture['id_vehivule'] ?>" class="list_link">
                                 <h4 class="text-uppercase mb-4" style="cursor: pointer;"><?= $voiture['marque'] ?>
                                     <?= $voiture['modele'] ?>

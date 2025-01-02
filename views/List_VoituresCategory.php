@@ -3,10 +3,14 @@ session_start();
 require_once '../middleware/Check_user_connexion.php';
 require_once '../Controllers/ListVoitureController.php';
 require_once '../Controllers/ListCategories.php';
+require_once '../Controllers/getVoituresByCategory.php';
 Check_List_Voiture_Page();
 
 $categoriesController = new ListCategoriesController();
 $categories = $categoriesController->getCategories();
+
+$voituresController = new ListVoitureController();
+$listVoiture = $voituresController->All_Voitures();
 
 ?>
 
@@ -40,7 +44,20 @@ $categories = $categoriesController->getCategories();
 
     <!-- Template Stylesheet -->
     <link href="../assets/css/style.css" rel="stylesheet">
+    <link href="../assets/css/ListVoituresCategories.css" rel="stylesheet">
 
+    <style>
+        .list_voiture {
+            & img {
+                width: 100%;
+                height: 200px;
+            }
+
+            & .list_link {
+                text-decoration: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -158,7 +175,8 @@ $categories = $categoriesController->getCategories();
             <div class="horizontal-scroll">
                 <?php foreach ($categories as $category): ?>
                     <div class="category-box">
-                        <a href="#" class="category-link"><?= $category['category_name']; ?></a>
+                        <button type="button" data-category-id="<?= $category['id_category']; ?>"
+                            class="category-link categories_btn"><?= $category['category_name']; ?></button>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -166,78 +184,40 @@ $categories = $categoriesController->getCategories();
     </div>
 
 
-
-
-
-
-    <style>
-        .horizontal-scroll {
-            display: flex;
-            overflow-x: auto;
-            /* Active le défilement horizontal */
-            gap: 15px;
-            /* Espacement entre les éléments */
-            padding: 10px;
-            scrollbar-width: thin;
-            /* Réduit la largeur de la scrollbar pour Firefox */
-            scrollbar-color: darkblue #f1f1f1;
-            /* Couleur de la barre de défilement */
-        }
-
-        .horizontal-scroll::-webkit-scrollbar {
-            height: 8px;
-            /* Hauteur de la scrollbar */
-        }
-
-        .horizontal-scroll::-webkit-scrollbar-thumb {
-            background-color: #00bcd4;
-            /* Couleur de la barre de défilement */
-            border-radius: 10px;
-        }
-
-        .horizontal-scroll::-webkit-scrollbar-track {
-            background-color: #f1f1f1;
-            /* Couleur de l'arrière-plan de la barre */
-        }
-
-        .category-box {
-            flex: 0 0 auto;
-            /* Assure que chaque catégorie conserve ses dimensions */
-            width: 10rem;
-            height: 5rem;
-            /* Hauteur réduite à 5rem */
-            background: linear-gradient(145deg, #ffffff, #e6e6e6);
-            /* Dégradé moderne */
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .category-box:hover {
-            transform: translateY(-5px);
-            /* Légère élévation au survol */
-            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .category-link {
-            text-decoration: none;
-            color: #333;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-
-        .category-link:hover {
-            color: #00bcd4;
-            /* Couleur d'accent au survol */
-        }
-    </style>
-
+    <div class="container-fluid pb-5">
+        <div class="container pb-3">
+            <div class="row" id="voituresList">
+                <?php foreach ($listVoiture as $voiture): ?>
+                    <div class="col-lg-4 col-md-6 mb-2" id="<?= $voiture['id_vehivule'] ?>">
+                        <div class="rent-item mb-4 list_voiture">
+                            <img class="img-fluid mb-4" src="<?= $voiture['image_url'] ?>" alt="<?= $voiture['modele'] ?>">
+                            <a href="./Voiture_details.php?id=<?= $voiture['id_vehivule'] ?>" class="list_link">
+                                <h4 class="text-uppercase mb-4" style="cursor: pointer;"><?= $voiture['marque'] ?>
+                                    <?= $voiture['modele'] ?>
+                                </h4>
+                            </a>
+                            <div class="d-flex justify-content-center mb-4">
+                                <div class="px-2">
+                                    <i class="fa fa-car text-primary mr-1"></i>
+                                    <span><?= $voiture['couleur'] ?></span>
+                                </div>
+                                <div class="px-2 border-left border-right">
+                                    <i class="fa fa-cogs text-primary mr-1"></i>
+                                    <span><?= $voiture['transmission'] ?></span>
+                                </div>
+                                <div class="px-2">
+                                    <i class="fa fa-road text-primary mr-1"></i>
+                                    <span><?= $voiture['kilometrage'] ?>Km</span>
+                                </div>
+                            </div>
+                            <a class="btn btn-primary px-3"
+                                href="./Voiture_details.php?id=<?= $voiture['id_vehivule'] ?>">$<?= $voiture['prixJournalier'] ?>/jour</a>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Rent A Car End -->
@@ -306,10 +286,58 @@ $categories = $categoriesController->getCategories();
     <script src="../assets/lib/owlcarousel/owl.carousel.min.js"></script>
     <script src="../assets/lib/tempusdominus/js/moment.min.js"></script>
     <script src="../assets/lib/tempusdominus/js/moment-timezone.min.js"></script>
+
     <script src="../assets/lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
 
     <!-- Template Javascript -->
     <script src="../assets/js/main.js"></script>
+
+    <script>
+        document.querySelectorAll('.categories_btn').forEach(button => {
+            button.addEventListener('click', function () {
+                const categoryId = this.dataset.categoryId;
+                fetch(`../Controllers/getVoituresByCategory.php?category_id=${categoryId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+
+                        voituresList.innerHTML = '';
+                        data.forEach(voiture => {
+                            voituresList.innerHTML += `
+                        <div class="col-lg-4 col-md-6 mb-2" id="${voiture.id_vehivule}">
+                            <div class="rent-item mb-4 list_voiture">
+                                <img class="img-fluid mb-4" src="${voiture.image_url}" alt="${voiture.modele}">
+                                <a href="./Voiture_details.php?id=${voiture.id_vehivule}" class="list_link">
+                                    <h4 class="text-uppercase mb-4" style="cursor: pointer;">${voiture.marque} ${voiture.modele}</h4>
+                                </a>
+                                <div class="d-flex justify-content-center mb-4">
+                                    <div class="px-2">
+                                        <i class="fa fa-car text-primary mr-1"></i>
+                                        <span>${voiture.couleur}</span>
+                                    </div>
+                                    <div class="px-2 border-left border-right">
+                                        <i class="fa fa-cogs text-primary mr-1"></i>
+                                        <span>${voiture.transmission}</span>
+                                    </div>
+                                    <div class="px-2">
+                                        <i class="fa fa-road text-primary mr-1"></i>
+                                        <span>${voiture.kilometrage}Km</span>
+                                    </div>
+                                </div>
+                                <a class="btn btn-primary px-3" href="./Voiture_details.php?id=${voiture.id_vehivule}">
+                                    $${voiture.prixJournalier}/jour
+                                </a>
+                            </div>
+                        </div>`;
+                        });
+
+                    })
+                    .catch(error => console.error(error));
+            });
+        });
+
+    </script>
+
 </body>
 
 </html>
