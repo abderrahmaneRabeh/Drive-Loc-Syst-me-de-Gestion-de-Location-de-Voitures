@@ -102,13 +102,13 @@ class Voiture extends Database
         return $query->rowCount();
     }
 
-    // public function Rechercher_Voiture($recherche)
-    // {
+    public function CheckClientReservationPourFaireAvis($id_client, $id_vehicule)
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM reservations WHERE client_id = :id_client AND vehicule_id = :id_vehicule");
+        $query->bindParam(':id_client', $id_client);
+        $query->bindParam(':id_vehicule', $id_vehicule);
+        $query->execute();
+        return $query->rowCount();
+    }
 
-    //     $query = $this->Conx_DataBase->prepare("SELECT * FROM vehicule WHERE modele LIKE :recherche OR marque LIKE :recherche");
-    //     $query->bindValue(':recherche', $recherche, PDO::PARAM_STR);
-    //     $query->execute();
-    //     $voitures = $query->fetchAll();
-    //     return $voitures;
-    // }
 }

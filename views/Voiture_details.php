@@ -10,6 +10,9 @@ if (isset($_GET['id'])) {
 
     $ListVoitureController = new ListVoitureController();
     $voiture = $ListVoitureController->Get_One_Voiture($id);
+    $isClientReserved = $ListVoitureController->CheckClientReservationPourFaireAvis($_SESSION['user']['id_utilisateur'], $id);
+
+    // var_dump($isClientReserved);
 }
 ?>
 
@@ -18,7 +21,7 @@ if (isset($_GET['id'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>ROYAL CARS - Car Rental HTML Template</title>
+    <title>DRIVE-LOC -- Voiture Details</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -201,7 +204,7 @@ if (isset($_GET['id'])) {
                 <!-- Reservation Form -->
                 <div class="col-lg-4">
                     <div class="bg-white shadow p-4 rounded">
-                        <?php if (isset($_SESSION['user'])): ?>
+                        <?php if (isset($_SESSION['user']) && $_SESSION['role'] == 2): ?>
                             <h3 class="text-primary text-center mb-4">Réserver ce véhicule</h3>
                             <?php
                             if (isset($_SESSION["error"])) {
@@ -255,6 +258,45 @@ if (isset($_GET['id'])) {
                         <?php else: ?>
                             <h4 class="text-primary text-center mb-4">Just Les Utilisateurs <br>peuvent Reserver</h4>
                         <?php endif; ?>
+                    </div>
+                    <div class="bg-white shadow p-4 rounded mt-3">
+
+                        <?php if ($isClientReserved): ?>
+                            <h4 class="text-primary text-center mb-4">Évaluer ce véhicule</h4>
+                            <form action="../Controllers/RateVoiture.php" method="POST">
+                                <input type="hidden" name="id_voiture" value="<?= $voiture['id_vehivule'] ?>">
+
+                                <!-- Rating -->
+                                <div class="form-group">
+                                    <label for="rating">Note</label>
+                                    <select name="rating" id="rating" class="form-control" required>
+                                        <option value="" selected disabled>Choisissez une note</option>
+                                        <option value="1">1 étoile</option>
+                                        <option value="2">2 étoiles</option>
+                                        <option value="3">3 étoiles</option>
+                                        <option value="4">4 étoiles</option>
+                                        <option value="5">5 étoiles</option>
+                                    </select>
+                                </div>
+
+                                <!-- Comment -->
+                                <div class="form-group">
+                                    <label for="comment">Commentaire</label>
+                                    <textarea name="comment" id="comment" class="form-control" rows="3"
+                                        placeholder="Laissez un commentaire"></textarea>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary btn-block">Soumettre
+                                        l'évaluation</button>
+                                </div>
+                            </form>
+                        <?php else: ?>
+                            <h4 class="text-primary text-center mb-4">Reserver ce véhicule <br>pour pouvoir évaluer</h4>
+                        <?php endif; ?>
+
+
                     </div>
                 </div>
             </div>
