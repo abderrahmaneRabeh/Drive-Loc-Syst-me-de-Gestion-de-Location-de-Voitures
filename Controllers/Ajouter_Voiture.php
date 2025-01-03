@@ -50,10 +50,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($tout_est_effectuer) {
     $_SESSION["success"] = "Voitures ajouter avec success";
-    header("Location: /dashboard/admin/voiture.php");
+    header("Location: ../dashboard/admin/voiture.php");
     exit;
 } else {
     $_SESSION["error"] = "Voitures non ajouter";
-    header("Location: /dashboard/admin/voiture.php");
+    header("Location: ../dashboard/admin/voiture.php");
     exit;
 }

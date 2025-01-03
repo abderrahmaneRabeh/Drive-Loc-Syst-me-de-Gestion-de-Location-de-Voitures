@@ -16,10 +16,10 @@ $result = $Delete_Voiture_Controller->Delete($_GET['id']);
 
 if ($result) {
     $_SESSION["success"] = "Voiture supprimer avec success";
-    header("Location: /dashboard/admin/voiture.php");
+    header("Location: ../dashboard/admin/voiture.php");
     exit;
 } else {
     $_SESSION["error"] = "Voiture non supprimer";
-    header("Location: /dashboard/admin/voiture.php");
+    header("Location: ../dashboard/admin/voiture.php");
     exit;
 }

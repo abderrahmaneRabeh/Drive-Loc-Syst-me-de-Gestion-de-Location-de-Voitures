@@ -176,7 +176,7 @@ $categories = $GategoryController->getCategories();
                 <!-- Add New Voiture Button -->
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h2 style="color: white;">Liste des Categories</h2>
-                    <a href="/views/Ajouter_categorie__form.php" class="btn"
+                    <a href="../../views/Ajouter_categorie__form.php" class="btn"
                         style="background-color: #fff; color: #000;">Ajouter une nouvelle
                         Categorie</a>
                 </div>

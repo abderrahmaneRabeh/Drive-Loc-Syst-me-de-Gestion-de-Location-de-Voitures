@@ -28,11 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = $Modifier_Voiture_Controller->Modifier($id, $modele, $marque, $prixJournalier, $transmission, $couleur, $kilometrage, $voiture_img, $disponible, $category);
     if ($result) {
         $_SESSION["success"] = "Voiture modifier avec success";
-        header("Location: /dashboard/admin/voiture.php");
+        header("Location: ../dashboard/admin/voiture.php");
         exit;
     } else {
         $_SESSION["error"] = "Voiture non modifier";
-        header("Location: /dashboard/admin/voiture.php");
+        header("Location: ../dashboard/admin/voiture.php");
     }
 } else {
     echo "Error dans Traitement  de la requête";

@@ -11,19 +11,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (strtotime($dateDebut) < time()) {
         $_SESSION["error"] = "La date de début doit être une date future.";
-        header("Location: /views/Update_Reservation__form.php?id=$id_reservation");
+        header("Location: ../views/Update_Reservation__form.php?id=$id_reservation");
         exit;
     }
     if (strtotime($dateFin) < time()) {
         $_SESSION["error"] = "La date de fin doit être une date future.";
-        header("Location: /views/Update_Reservation__form.php?id=$id_reservation");
+        header("Location: ../views/Update_Reservation__form.php?id=$id_reservation");
         exit;
     }
 
     // Vérifier si la date de fin est après la date de début
     if (strtotime($dateFin) <= strtotime($dateDebut)) {
         $_SESSION["error"] = "La date de fin doit être posterieure à la date de début.";
-        header("Location: /views/Update_Reservation__form.php?id=$id_reservation");
+        header("Location: ../views/Update_Reservation__form.php?id=$id_reservation");
         exit;
     }
 
@@ -33,11 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result) {
         $_SESSION["success"] = "La reservation a bien été modifiée.";
-        header("Location: /dashboard/client/reservation.php?id=$id_reservation");
+        header("Location: ../dashboard/client/reservation.php?id=$id_reservation");
         exit;
     } else {
         $_SESSION["error"] = "Une erreur s'est produite lors de la modification de la reservation.";
-        header("Location: /dashboard/client/reservation.php?id=$id_reservation");
+        header("Location: ../dashboard/client/reservation.php?id=$id_reservation");
         exit;
     }
 }

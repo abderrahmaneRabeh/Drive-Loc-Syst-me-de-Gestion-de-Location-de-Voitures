@@ -18,12 +18,13 @@ if (isset($_GET['id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DRIVE-LOC -- Ajouter Voiture</title>
+    <title>DRIVE-LOC -- Modifier Avis</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/assets/css/ajouterVoiture.css">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/ajouterVoiture.css">
 
     <link href="../assets/img/vendor-7.png" rel="icon">
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
     <style>
         .alert {
             padding: 10px;
@@ -38,12 +39,12 @@ if (isset($_GET['id'])) {
 <body>
     <div class="container">
         <div class="top-buttons">
-            <a href="/dashboard/admin/voiture.php" class="btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            <a href="/index.php" class="btn"><i class="fas fa-home"></i> Home</a>
+            <a href="../dashboard/client/avis.php" class="btn"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+            <a href="../index.php" class="btn"><i class="fas fa-home"></i> Home</a>
         </div>
         <h2>Modifier Avis</h2>
 
-        <form action="/Controllers/ModifierAvis.php" method="POST" id="carForm">
+        <form action="../Controllers/ModifierAvis.php" method="POST" id="carForm">
             <input type="hidden" name="id_reservation" value="<?= $reservation['id_reservation'] ?>">
             <!-- Date début -->
             <?php
