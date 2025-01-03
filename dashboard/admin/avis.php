@@ -200,7 +200,7 @@ $list_avis = $avis->getAllAvis();
                                         echo '<i class="fas fa-star"></i>'; ?></td>
                                     <td class="text-center"><?= $avis['date']; ?></td>
                                     <td class="text-center">
-                                        <a href="/Controllers/Delete_Avis.php?id=<?= $avis['id_avis']; ?>"
+                                        <a href="../../Controllers/Delete_Avis.php?id=<?= $avis['id_avis']; ?>"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
                                     </td>

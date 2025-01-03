@@ -1,7 +1,27 @@
 <?php
 session_start();
 require_once '../../middleware/Check_user_connexion.php';
+require_once '../../Models/statistique.php';
 Dashboard_admin_check_roleConnect();
+
+
+$statistique = new Statistique();
+$statistique_utilisateur = $statistique->Statistique_utilisateur();
+$statistique_vehicule = $statistique->Statistique_vehicule();
+$statistique_avis = $statistique->Statistique_avis();
+$statistique_reservation = $statistique->Statistique_reservation();
+$statistique_reservation_Confirmee = $statistique->Statistique_reservation_Confirmee();
+$statistique_reservation_en_cours = $statistique->Statistique_reservation_en_cours();
+$statistique_reservation_annuler = $statistique->Statistique_reservation_annuler();
+
+$Nbr_utilisateur = count($statistique_utilisateur);
+$Nbr_vehicule = count($statistique_vehicule);
+$Nbr_avis = count($statistique_avis);
+$Nbr_reservation = count($statistique_reservation);
+$Nbr_reservation_Confirmee = count($statistique_reservation_Confirmee);
+$Nbr_reservation_en_cours = count($statistique_reservation_en_cours);
+$Nbr_reservation_annuler = count($statistique_reservation_annuler);
+
 
 
 ?>
@@ -15,6 +35,8 @@ Dashboard_admin_check_roleConnect();
 
     <link rel="stylesheet" href="../css/style.css">
     <script defer src="../js/main.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+
     <link href="/assets/img/vendor-7.png" rel="icon">
 
 
@@ -156,7 +178,311 @@ Dashboard_admin_check_roleConnect();
                 </div>
             </div>
             <div class="products-area-wrapper tableView">
+                <!-- diplay users starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Registered Users</h2>
+                    <p class="user-count">Total Users: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_utilisateur; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_utilisateur)) {
+                                foreach ($statistique_utilisateur as $index => $user) {
+                                    echo "<tr>
+                                            <td>" . htmlspecialchars($user['username']) . "</td>
+                                            <td>" . htmlspecialchars($user['email']) . "</td>
+                                        </tr>";
+                                }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay users ends -->
 
+                <!-- diplay vehicles starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Vehicules Disponible</h2>
+                    <p class="user-count">Total Vehicules: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_vehicule; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Modèle</th>
+                                <th>Marque</th>
+                                <th>Prix Journalier</th>
+                                <th>Transmission</th>
+                                <th>Couleur</th>
+                                <th>Kilométrage</th>
+                                <th>Disponible</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $count = 0;
+                            if (!empty($statistique_vehicule)) {
+                                foreach ($statistique_vehicule as $index => $voiture) {
+                                    if ($count < 5) { ?>
+                                        <tr>
+                                            <td><?= $voiture['modele']; ?></td>
+                                            <td><?= $voiture['marque']; ?></td>
+                                            <td>$<?= $voiture['prixJournalier']; ?></td>
+                                            <td><?= $voiture['transmission']; ?></td>
+                                            <td><?= $voiture['couleur']; ?></td>
+                                            <td><?= $voiture['kilometrage']; ?>Km</td>
+                                            <td class="text-center">
+                                                <?php if ($voiture['disponible']) { ?>
+                                                    <span class="badge badge-success">Oui</span>
+                                                <?php } else { ?>
+                                                    <span class="badge badge-danger">Non</span>
+                                                <?php } ?>
+                                            </td>
+                                        </tr>
+                                    <?php }
+                                    $count++;
+                                }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <a href="../../views/List_Voitures.php" class="btn btn-primary">Voir plus</a>
+                    </div>
+                </div>
+                <!-- diplay vehicles ends -->
+
+                <!-- diplay reservations starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Reservations</h2>
+                    <p class="user-count">Total Reservations: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_reservation; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Client</th>
+                                <th>vehicule</th>
+                                <th>dateDebut</th>
+                                <th>dateFin</th>
+                                <th>lieuPriseCharge</th>
+                                <th>lieuRetour</th>
+                                <th>Date de Reservation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_reservation)) {
+                                foreach ($statistique_reservation as $index => $reservation) { ?>
+                                    <tr>
+                                        <td><?= $reservation['username'] ?></td>
+                                        <td><?= $reservation['marque']; ?>         <?= $reservation['modele']; ?></td>
+                                        <td><?= $reservation['dateDebut']; ?></td>
+                                        <td><?= $reservation['dateFin']; ?></td>
+                                        <td><?= $reservation['lieuPriseCharge']; ?></td>
+                                        <td><?= $reservation['lieuRetour']; ?></td>
+                                        <td class="text-center"><?= $reservation['dateCreation']; ?></td>
+                                    </tr>
+                                <?php }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay reservations ends -->
+
+                <!-- diplay reservations confermee starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Reservations <span class="text-success">confermee</span></h2>
+                    <p class="user-count">Total Reservations Confermee: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_reservation_Confirmee; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Client</th>
+                                <th>vehicule</th>
+                                <th>dateDebut</th>
+                                <th>dateFin</th>
+                                <th>lieuPriseCharge</th>
+                                <th>lieuRetour</th>
+                                <th>Date de Reservation</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_reservation_Confirmee)) {
+                                foreach ($statistique_reservation_Confirmee as $index => $reservation) { ?>
+                                    <tr>
+                                        <td><?= $reservation['username'] ?></td>
+                                        <td><?= $reservation['marque']; ?>         <?= $reservation['modele']; ?></td>
+                                        <td><?= $reservation['dateDebut']; ?></td>
+                                        <td><?= $reservation['dateFin']; ?></td>
+                                        <td><?= $reservation['lieuPriseCharge']; ?></td>
+                                        <td><?= $reservation['lieuRetour']; ?></td>
+                                        <td class="text-center"><?= $reservation['dateCreation']; ?></td>
+                                        <td><span class="badge badge-success p-2"><?= $reservation['statut']; ?></span></td>
+                                    </tr>
+                                <?php }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay reservations confermee ends -->
+
+                <!-- diplay reservations encours starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Reservations <span class="text-warning">encours</span></h2>
+                    <p class="user-count">Total Reservations encours: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_reservation_en_cours; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Client</th>
+                                <th>vehicule</th>
+                                <th>dateDebut</th>
+                                <th>dateFin</th>
+                                <th>lieuPriseCharge</th>
+                                <th>lieuRetour</th>
+                                <th>Date de Reservation</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_reservation_en_cours)) {
+                                foreach ($statistique_reservation_en_cours as $index => $reservation) { ?>
+                                    <tr>
+                                        <td><?= $reservation['username'] ?></td>
+                                        <td><?= $reservation['marque']; ?>         <?= $reservation['modele']; ?></td>
+                                        <td><?= $reservation['dateDebut']; ?></td>
+                                        <td><?= $reservation['dateFin']; ?></td>
+                                        <td><?= $reservation['lieuPriseCharge']; ?></td>
+                                        <td><?= $reservation['lieuRetour']; ?></td>
+                                        <td class="text-center"><?= $reservation['dateCreation']; ?></td>
+                                        <td><span class="badge badge-warning p-2"><?= $reservation['statut']; ?></span></td>
+                                    </tr>
+                                <?php }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay reservations encours ends -->
+
+                <!-- diplay reservations Annuler starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Reservations <span class="text-danger">Annuler</span></h2>
+                    <p class="user-count">Total Reservations annuler: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_reservation_annuler; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Client</th>
+                                <th>vehicule</th>
+                                <th>dateDebut</th>
+                                <th>dateFin</th>
+                                <th>lieuPriseCharge</th>
+                                <th>lieuRetour</th>
+                                <th>Date de Reservation</th>
+                                <th>status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_reservation_annuler)) {
+                                foreach ($statistique_reservation_annuler as $index => $reservation) { ?>
+                                    <tr>
+                                        <td><?= $reservation['username'] ?></td>
+                                        <td><?= $reservation['marque']; ?>         <?= $reservation['modele']; ?></td>
+                                        <td><?= $reservation['dateDebut']; ?></td>
+                                        <td><?= $reservation['dateFin']; ?></td>
+                                        <td><?= $reservation['lieuPriseCharge']; ?></td>
+                                        <td><?= $reservation['lieuRetour']; ?></td>
+                                        <td class="text-center"><?= $reservation['dateCreation']; ?></td>
+                                        <td><span class="badge badge-danger p-2"><?= $reservation['statut']; ?></span></td>
+                                    </tr>
+                                <?php }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay reservations Annuler ends -->
+
+
+
+
+
+                <!-- diplay Avis starts -->
+                <div class="users-table-container text-white">
+                    <h2 class="section-title">Avis</h2>
+                    <p class="user-count">Total Avis: <span
+                            class="badge badge-pill badge-primary"><?php echo $Nbr_avis; ?></span></p>
+                    <table class="users-table table table-striped table-bordered text-white">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>vehicule</th>
+                                <th>client</th>
+                                <th>contenu</th>
+                                <th>note</th>
+                                <th class="text-center">date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            if (!empty($statistique_avis)) {
+                                foreach ($statistique_avis as $avis) { ?>
+                                    <?php if ($avis['estSupprime'] == 0): ?>
+                                        <tr>
+                                            <td><?= $avis['marque']; ?>             <?= $avis['modele']; ?></td>
+                                            <td><?= $avis['username']; ?></td>
+                                            <td><?= $avis['contenu']; ?></td>
+                                            <td><?php for ($i = 0; $i < $avis['note']; $i++)
+                                                echo '<i class="fas fa-star"></i>'; ?></td>
+                                            <td class="text-center"><?= $avis['date']; ?></td>
+                                        </tr>
+                                    <?php endif; ?>
+                                <?php }
+                            } else {
+                                echo "<tr>
+                                        <td colspan='3' class='no-data text-center'>No users found</td>
+                                    </tr>";
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- diplay reservations ends -->
 
             </div>
         </div>

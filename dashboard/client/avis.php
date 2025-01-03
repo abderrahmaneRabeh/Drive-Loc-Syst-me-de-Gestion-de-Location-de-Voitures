@@ -165,10 +165,10 @@ $list_avis = $avis->getUserAvis($_SESSION['user']['id_utilisateur']);
                                         echo '<i class="fas fa-star"></i>'; ?></td>
                                     <td class="text-center"><?= $avis['date']; ?></td>
                                     <td class="text-center">
-                                        <a href="/Controllers/Delete_AvisClient.php?id=<?= $avis['id_avis']; ?>"
+                                        <a href="../../Controllers/Delete_AvisClient.php?id=<?= $avis['id_avis']; ?>"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
-                                        <a href="/views/Modifier_avis__form.php?id=<?= $avis['id_avis']; ?>"
+                                        <a href="../../views/Modifier_avis__form.php?id=<?= $avis['id_avis']; ?>"
                                             class="btn btn-info btn-sm">Modifier</a>
                                     </td>
                                 </tr>

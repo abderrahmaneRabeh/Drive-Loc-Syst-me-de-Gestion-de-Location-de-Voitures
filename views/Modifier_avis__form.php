@@ -9,10 +9,6 @@ $Avis = new Avis();
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $avis = $Avis->getOneAvis($id);
-
-    // echo "<pre>";
-    // print_r($avis);
-    // echo "</pre>";
 }
 ?>
 

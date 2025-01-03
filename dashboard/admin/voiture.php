@@ -228,9 +228,9 @@ $LignesSelectioner = ceil($totalLignes / $LigneParPage);
                                     <?php } ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/views/Modifier_voiture__form.php?id=<?= $voiture['id_vehivule']; ?>"
+                                    <a href="../../views/Modifier_voiture__form.php?id=<?= $voiture['id_vehivule']; ?>"
                                         class="btn btn-warning btn-sm">Modifier</a>
-                                    <a href="/Controllers/Delete_Voiture.php?id=<?= $voiture['id_vehivule']; ?>"
+                                    <a href="../../Controllers/Delete_Voiture.php?id=<?= $voiture['id_vehivule']; ?>"
                                         class="btn btn-danger btn-sm"
                                         onclick="return confirm('Voulez-vous supprimer ce véhicule ?')">Supprimer</a>
                                 </td>
