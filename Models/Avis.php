@@ -16,6 +16,14 @@ class Avis extends Database
         return $query->fetchAll();
     }
 
+    public function getOneAvis($id)
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM avis WHERE id_avis = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+        return $query->fetch();
+    }
+
     public function Ajouter_Avis($note, $contenu, $id_client, $id_vehicule)
     {
         $query = $this->Conx_DataBase->prepare("INSERT INTO avis (note, contenu, client_id, vehicule_id) VALUES (:note, :contenu, :id_client, :id_vehicule)");
@@ -41,5 +49,15 @@ class Avis extends Database
         $query->bindParam(':id_user', $id_user);
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public function Modifier_Avis($id, $note, $contenu)
+    {
+        $query = $this->Conx_DataBase->prepare("UPDATE avis SET note = :note, contenu = :contenu WHERE id_avis = :id");
+        $query->bindParam(':id', $id);
+        $query->bindParam(':note', $note);
+        $query->bindParam(':contenu', $contenu);
+        $query->execute();
+        return $query->rowCount();
     }
 }

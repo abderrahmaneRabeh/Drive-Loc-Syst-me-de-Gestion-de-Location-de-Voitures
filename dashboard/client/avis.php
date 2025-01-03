@@ -168,6 +168,8 @@ $list_avis = $avis->getUserAvis($_SESSION['user']['id_utilisateur']);
                                         <a href="/Controllers/Delete_AvisClient.php?id=<?= $avis['id_avis']; ?>"
                                             class="btn btn-danger btn-sm"
                                             onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
+                                        <a href="/views/Modifier_avis__form.php?id=<?= $avis['id_avis']; ?>"
+                                            class="btn btn-info btn-sm">Modifier</a>
                                     </td>
                                 </tr>
                             <?php endif; ?>
