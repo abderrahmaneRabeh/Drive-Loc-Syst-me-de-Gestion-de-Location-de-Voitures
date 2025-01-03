@@ -120,14 +120,11 @@ class Voiture extends Database
         return $query->fetch();
     }
 
-    // public function GetUserVoitureAvis($id_client, $id_vehicule)
-    // {
-    //     $query = $this->Conx_DataBase->prepare("SELECT * FROM avis WHERE client_id = :id_client AND vehicule_id = :id_vehicule");
-    //     $query->bindParam(':id_client', $id_client);
-    //     $query->bindParam(':id_vehicule', $id_vehicule);
-    //     $query->execute();
-    //     return $query->fetch();
-
-    // }
+    public function TestViewVehicule()
+    {
+        $query = $this->Conx_DataBase->prepare("SELECT * FROM ListeVehicules");
+        $query->execute();
+        return $query->fetchAll();
+    }
 
 }

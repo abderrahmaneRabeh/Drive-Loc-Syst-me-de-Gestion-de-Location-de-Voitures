@@ -65,7 +65,7 @@ $list_avis = $avis->getAllAvis();
                             <path d="M15 10l-3 3h8l-1.5 1.5L15 10z" />
                             <path d="M10 8h4L10 2 6 8h4l-2 2z" />
                         </svg>
-                        <span>Avis</span>
+                        <span>Voiture</span>
                     </a>
                 </li>
                 <li class="sidebar-list-item">

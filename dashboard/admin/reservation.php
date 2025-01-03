@@ -222,7 +222,7 @@ $listVoiture = $reservation->getAllReservations();
                                     <?php elseif ($voiture['statut'] == "Annulee"): ?>
                                         <span class="badge badge-danger p-2">Annulé</span>
                                     <?php else: ?>
-                                        <form action="/Controllers/UpdateStatut.php" method="POST">
+                                        <form action="../../Controllers/UpdateStatut.php" method="POST">
                                             <select name="statut" onchange="this.form.submit()">
                                                 <?php if ($voiture['statut'] === 'en attente'): ?>
                                                     <option value="en attente" selected>En attente</option>
@@ -245,7 +245,7 @@ $listVoiture = $reservation->getAllReservations();
                                     <?php endif; ?>
                                 </td>
                                 <td class="text-center">
-                                    <a href="/Controllers/Delete_Reservation.php?id=<?= $voiture['id_reservation']; ?>"
+                                    <a href="../../Controllers/Delete_Reservation.php?id=<?= $voiture['id_reservation']; ?>"
                                         class="btn btn-danger btn-sm"
                                         onclick="return confirm('Voulez-vous supprimer ce Reservation ?')">Supprimer</a>
                                 </td>

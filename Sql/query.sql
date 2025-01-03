@@ -84,3 +84,11 @@ DELIMITER ;
 -- pour tester
 
 CALL inserer_reservation(2, 1, '2024-11-25', '2024-11-28', 'Gare de Lyon', 'Aéroport Charles de Gaulle','En attente');
+
+
+-- view
+
+DROP VIEW IF EXISTS ListeVehicules;
+CREATE VIEW ListeVehicules AS
+SELECT * FROM vehicule v, avis a, categories c
+WHERE v.id_vehivule = a.vehicule_id  AND c.id_category = v.categorie_id;

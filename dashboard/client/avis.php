@@ -73,11 +73,9 @@ $list_avis = $avis->getUserAvis($_SESSION['user']['id_utilisateur']);
                     <a href="./avis.php">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="feather feather-calendar">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-                            <line x1="16" y1="2" x2="16" y2="6" />
-                            <line x1="8" y1="2" x2="8" y2="6" />
-                            <line x1="3" y1="10" x2="21" y2="10" />
+                            class="feather feather-message-circle">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M8.56 4.38A8 8 0 0 0 1 12h6.14l1.98-2.96L8.56 4.38z" />
                         </svg>
                         <span>Avis</span>
                     </a>
