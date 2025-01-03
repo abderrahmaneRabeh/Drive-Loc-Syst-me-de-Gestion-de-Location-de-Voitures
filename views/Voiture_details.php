@@ -12,7 +12,8 @@ if (isset($_GET['id'])) {
     $voiture = $ListVoitureController->Get_One_Voiture($id);
     $isClientReserved = $ListVoitureController->CheckClientReservationPourFaireAvis($_SESSION['user']['id_utilisateur'], $id);
 
-    // var_dump($isClientReserved);
+    $isClientAvis = $ListVoitureController->ChekUserAvis($_SESSION['user']['id_utilisateur'], $id);
+
 }
 ?>
 
@@ -273,35 +274,45 @@ if (isset($_GET['id'])) {
                                 unset($_SESSION["successAvis"]);
                             }
                             ?>
-                            <form action="../Controllers/RateVoiture.php" method="POST">
-                                <input type="hidden" name="id_voiture" value="<?= $voiture['id_vehivule'] ?>">
-
-                                <!-- Rating -->
-                                <div class="form-group">
-                                    <label for="rating">Note</label>
-                                    <select name="rating" id="rating" class="form-control" required>
-                                        <option value="" selected disabled>Choisissez une note</option>
-                                        <option value="1">&#9733; </option>
-                                        <option value="2">&#9733; &#9733;</option>
-                                        <option value="3">&#9733; &#9733; &#9733;</option>
-                                        <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
-                                        <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
-                                    </select>
+                            <?php if ($isClientAvis): ?>
+                                <span style="font-weight: bold; color: #666">Vous avez deja avaluer ce voiture</span>
+                                <div style="display: flex; align-items: center;">
+                                    <span style="margin-right: 10px;">Note: </span>
+                                    <?php for ($i = 0; $i < $isClientAvis['note']; $i++): ?>
+                                        <span style="color: gold; font-size: 20px">&#9733;</span>
+                                    <?php endfor; ?>
                                 </div>
+                            <?php else: ?>
+                                <form action="../Controllers/RateVoiture.php" method="POST">
+                                    <input type="hidden" name="id_voiture" value="<?= $voiture['id_vehivule'] ?>">
 
-                                <!-- Comment -->
-                                <div class="form-group">
-                                    <label for="comment">Commentaire</label>
-                                    <textarea name="comment" id="comment" class="form-control" rows="3"
-                                        placeholder="Laissez un commentaire"></textarea>
-                                </div>
+                                    <!-- Rating -->
+                                    <div class="form-group">
+                                        <label for="rating">Note</label>
+                                        <select name="rating" id="rating" class="form-control" required>
+                                            <option value="" selected disabled>Choisissez une note</option>
+                                            <option value="1">&#9733; </option>
+                                            <option value="2">&#9733; &#9733;</option>
+                                            <option value="3">&#9733; &#9733; &#9733;</option>
+                                            <option value="4">&#9733; &#9733; &#9733; &#9733;</option>
+                                            <option value="5">&#9733; &#9733; &#9733; &#9733; &#9733;</option>
+                                        </select>
+                                    </div>
 
-                                <!-- Submit Button -->
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary btn-block">Soumettre
-                                        l'évaluation</button>
-                                </div>
-                            </form>
+                                    <!-- Comment -->
+                                    <div class="form-group">
+                                        <label for="comment">Commentaire</label>
+                                        <textarea name="comment" id="comment" class="form-control" rows="3"
+                                            placeholder="Laissez un commentaire"></textarea>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-primary btn-block">Soumettre
+                                            l'évaluation</button>
+                                    </div>
+                                </form>
+                            <?php endif; ?>
                         <?php else: ?>
                             <h4 class="text-primary text-center mb-4">Reserver ce véhicule <br>pour pouvoir évaluer</h4>
                         <?php endif; ?>
