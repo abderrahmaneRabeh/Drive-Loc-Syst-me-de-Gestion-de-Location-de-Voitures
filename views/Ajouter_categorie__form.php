@@ -52,10 +52,8 @@ AjouterFormCheck();
             const newCard = carCards[0].cloneNode(true);
             console.log("New card", newCard);
 
-            // Update the title of the new card
             newCard.querySelector('h3').textContent = `Category ${carCards.length + 1}`;
 
-            // Clear input values in the cloned card
             newCard.querySelectorAll('input').forEach(input => input.value = '');
 
             carGroupContainer.appendChild(newCard);
